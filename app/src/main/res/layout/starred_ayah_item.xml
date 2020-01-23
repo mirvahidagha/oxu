@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    app:cardBackgroundColor="#FFFFff"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="5dp"
+    app:cardMaxElevation="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:id="@+id/blue">
+
+        <TextView
+            android:id="@+id/ayah_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:paddingLeft="3dp"
+            android:layout_margin="4dp"
+            android:text="Bəqərə surəsi - 15"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:gravity="center_horizontal"
+            android:textStyle="normal"
+            />
+
+    </RelativeLayout>
+
+        <TextView
+            android:layout_below="@+id/blue"
+            android:id="@+id/ayah_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif"
+            android:padding="4dp"
+            android:text="thsrtjstrj\nsfsnfgnbsgfnffgnf\nstfhnasrthdbs\nsrthsrth"
+            android:textColor="@color/color_text"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:gravity="center" />
+    </RelativeLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

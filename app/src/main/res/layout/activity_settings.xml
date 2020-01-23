@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/reng6"
+    android:orientation="vertical"
+    tools:context="com.mirvahidagha.betterbet.Activities.SettingsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary_dark"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/dialog_row_style"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/notifications"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center"
+                    android:text="Notifications"
+                    android:textAlignment="center"
+                    android:textColor="@color/color_text"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <Switch
+                    android:id="@+id/live_notifications"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/dialog_row_style"
+                    android:padding="8dp"
+                    android:text="Live notifications"
+                    android:textColor="@color/color_text"
+                    android:textSize="18sp" />
+
+                <Switch
+                    android:id="@+id/today_notifications"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/dialog_row_style"
+                    android:padding="8dp"
+                    android:text="Today notifications"
+                    android:textColor="@color/color_text"
+                    android:textSize="18sp" />
+
+                <Switch
+                    android:id="@+id/other_notifications"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/dialog_row_style"
+                    android:padding="8dp"
+                    android:text="Other notifications"
+                    android:textColor="@color/color_text"
+                    android:textSize="18sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/dialog_row_style"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center"
+                    android:text="Appearance"
+                    android:textAlignment="center"
+                    android:textColor="@color/color_text"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/theme"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/dialog_row_style"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:textColor="@color/color_text"
+                    android:textSize="18sp">
+
+                    <RelativeLayout
+                        android:id="@+id/border_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/theme_selection"
+                        android:padding="2dp">
+
+                        <TextView
+                            android:id="@+id/theme_light"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/theme_light"
+                            android:gravity="center"
+                            android:text="light"
+                            android:textAlignment="center"
+                            android:textColor="@color/color_text_light"
+                            android:textSize="18dp">
+
+                        </TextView>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/border_dark"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/theme_selection"
+                        android:padding="2dp">
+
+                        <TextView
+                            android:id="@+id/theme_dark"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/theme_dark"
+                            android:gravity="center"
+                            android:text="dark"
+                            android:textAlignment="center"
+                            android:textColor="@color/color_text"
+                            android:textSize="18dp">
+
+                        </TextView>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

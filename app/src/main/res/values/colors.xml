@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#3eabc0</color>
+    <color name="colorPrimaryDark">#39c0e2</color>
+
+    <color name="float_transparent">#00000000</color>
+    <color name="dialog_true">#46ab46</color>
+    <color name="subdialog_true">#40808080</color>
+    <color name="color_dark">#40222222</color>
+
+    <color name="button_text_color">#FFFFFF</color>
+    <color name="dialog_false">#ab4646</color>
+    <color name="subdialog_false">#40808080</color>
+
+    <color name="dialog_today">#4646ab</color>
+    <color name="title_color">#66000000</color>
+    <color name="title_color_dark">#fff</color>
+    <color name="message_color">#797979</color>
+    <color name="message_color_dark">#fff</color>
+
+
+    <color name="main_green_color">#6bd505</color>
+    <color name="primary_dark">#00ffffff</color>
+    <color name="color_text">#696969</color>
+    <color name="color_backgroung">#00ffffff</color>
+    <color name="card_backgroung">#4b405c</color>
+
+    <!-- light theme-->
+    <color name="primary_dark_light">#2ecc71</color>
+    <color name="primary_dark_light2">#69d497</color>
+    <color name="color_backgroung_light">#E0E0E0</color>
+    <color name="card_backgroung_light">#ffffff</color>
+    <color name="color_text_light">#000000</color>
+
+    <color name="selected_theme">#f39c12</color>
+    <color name="black_overlay">#66000000</color>
+
+    <color name="color1">#68FFF6</color>
+    <color name="color2">#D3E814</color>
+    <color name="color3">#FFA672</color>
+    <color name="color4">#B35CE8</color>
+    <color name="color5">#65F8FF</color>
+
+    <color name="transparent">#00ffffff</color>
+    <color name="trans">#ae595959</color>
+
+
+    <color name="green">#56ec9a</color>
+    <color name="red">#ff6e63</color>
+    <color name="blue">#39c0e2</color>
+    <color name="yellow">#ede855</color>
+
+    <color name="reng1">#6d5988</color>
+    <color name="reng2">#3eabc0</color>
+    <color name="reng3">#289a91</color>
+    <color name="reng4">#82b48d</color>
+    <color name="reng5">#ca8f68</color>
+    <color name="reng6">#b23876</color>
+
+
+
+    <color name="card_bg_color">#f6f6f6</color>
+    <color name="card_bg_dark_color">#0e0e0e</color>
+    <color name="title_text_color">#258bd6</color>
+    <color name="content_text_color">#999da4</color>
+
+    <color name="white" >#00ffffff</color>
+    <color name="black" >#000000</color>
+
+
+
+</resources>

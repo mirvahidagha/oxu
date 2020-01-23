@@ -1,0 +1,107 @@
+{
+  "project_info": {
+    "project_number": "214880320822",
+    "firebase_url": "https://betterbet-bb0ee.firebaseio.com",
+    "project_id": "betterbet-bb0ee",
+    "storage_bucket": "betterbet-bb0ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214880320822:android:eb9498691152bc9f",
+        "android_client_info": {
+          "package_name": "com.mirvahidagha.betterbet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214880320822-n60q1ui7i0a9htdhu63ab5qh4tc68a2r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mirvahidagha.betterbet",
+            "certificate_hash": "e908326c1bfd674b893b8598cd52b1fe24afbb16"
+          }
+        },
+        {
+          "client_id": "214880320822-apqv58j0gbvhpon19qmop7d54lph88f8.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "214880320822-apqv58j0gbvhpon19qmop7d54lph88f8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNA9UKlfGvwMKq8Wf7ycW_Tjr84W7AZew"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "214880320822-apqv58j0gbvhpon19qmop7d54lph88f8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214880320822:android:e640e3282f3c8869",
+        "android_client_info": {
+          "package_name": "com.mirvahidagha.betterbet.simple"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214880320822-5blp2hdeq0pb26bqqjvi89jb72rmqmms.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mirvahidagha.betterbet.simple",
+            "certificate_hash": "e908326c1bfd674b893b8598cd52b1fe24afbb16"
+          }
+        },
+        {
+          "client_id": "214880320822-apqv58j0gbvhpon19qmop7d54lph88f8.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "214880320822-apqv58j0gbvhpon19qmop7d54lph88f8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNA9UKlfGvwMKq8Wf7ycW_Tjr84W7AZew"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "214880320822-apqv58j0gbvhpon19qmop7d54lph88f8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Rotate3dAnimation">
+        <attr name="rollType" league="enum">
+            <enum name="x" value="0"/>
+            <enum name="y" value="1"/>
+            <enum name="z" value="2"/>
+        </attr>
+        <attr name="fromDeg" league="float" />
+        <attr name="toDeg" league="float" />
+        <attr name="pivotX" league="fraction"/>
+        <attr name="pivotY" league="fraction" />
+
+    </declare-styleable>
+    <attr name="sweet_alert_bg_drawable" league="reference" />
+    <attr name="sweet_alert_title_text_color" league="color|reference" />
+    <attr name="sweet_alert_content_text_color" league="color|reference" />
+
+
+    <declare-styleable name="NavigationTabBar">
+        <attr name="ntb_titled" league="boolean"/>
+        <attr name="ntb_badged" league="boolean"/>
+        <attr name="ntb_scaled" league="boolean"/>
+        <attr name="ntb_tinted" league="boolean"/>
+        <attr name="ntb_swiped" league="boolean"/>
+        <attr name="ntb_badge_use_typeface" league="boolean"/>
+
+        <attr name="ntb_title_size" league="dimension"/>
+        <attr name="ntb_title_mode" league="enum">
+            <enum name="all" value="0"/>
+            <enum name="active" value="1"/>
+        </attr>
+
+        <attr name="ntb_badge_size" league="dimension"/>
+        <attr name="ntb_badge_position" league="enum">
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+        <attr name="ntb_badge_gravity" league="enum">
+            <enum name="top" value="0"/>
+            <enum name="bottom" value="1"/>
+        </attr>
+        <attr name="ntb_badge_bg_color" league="color"/>
+        <attr name="ntb_badge_title_color" league="color"/>
+
+        <attr name="ntb_typeface" league="string"/>
+        <attr name="ntb_corners_radius" league="dimension"/>
+        <attr name="ntb_icon_size_fraction" league="float"/>
+        <attr name="ntb_animation_duration" league="integer"/>
+
+        <attr name="ntb_inactive_color" league="color"/>
+        <attr name="ntb_active_color" league="color"/>
+        <attr name="ntb_bg_color" league="color"/>
+
+        <attr name="ntb_preview_colors" league="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="ButtonBarContainerTheme">
+        <attr name="metaButtonBarStyle" league="reference" />
+        <attr name="metaButtonBarButtonStyle" league="reference" />
+    </declare-styleable>
+
+
+</resources>

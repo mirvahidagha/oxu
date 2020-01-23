@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">Quran</string>
+    <string-array name="descriptions">
+        <item name="one1">Get three type of notifications from us all the time.</item>
+        <item name="two1">Don\'t forget happiness comes from winning! It is also benefitial for your health.</item>
+        <item name="three1">Money, money, money\nMust be funny\nIn the rich man\'s world\nMoney, money, money\nAlways sunny\nIn the rich man\'s world.</item>
+        <item name="four1">All we need is your satisfying. For this purpose we provide you an option to switch notifications off.</item>
+        <item name="five1">In order to save your mobile data we have developed new data saving method.</item>
+    </string-array>
+    <string-array name="headers">
+        <item name="one">Instant notification</item>
+        <item name="two">Win!</item>
+        <item name="three">Get money</item>
+        <item name="four">Don\'t disturb</item>
+        <item name="five">Saving mobile data</item>
+    </string-array>
+    <string name="title_activity_settings">Tənzimləmələr</string>
+
+    <string-array name="translations">
+        <item>Arabic (Original)</item>
+        <item>Əlixan Musayev</item>
+        <item>Ziya Bünyadov - Vasim Məmmədəliyev</item>
+        <item>Abdulbaki Gölpınarlı</item>
+        <item>Adem Uğur</item>
+        <item>Ali Bulaç - 1</item>
+        <item>Ali Bulaç - 2</item>
+        <item>Ali Fikri Yavuz</item>
+        <item>Bekir Sadak</item>
+        <item>Celal Yıldırım</item>
+        <item>Diyanet işleri</item>
+        <item>Diyanet vakfı</item>
+        <item>Edip Yüksel</item>
+        <item>Elmalılı Hamdi Yazır</item>
+        <item>Elmalılı Hamdi Yazır (sadələşdirilmiş -1)</item>
+        <item>Elmalılı Hamdi Yazır (sadələşdirilmiş -2)</item>
+        <item>Fizilal-il Kuran</item>
+        <item>Gültekin Onan</item>
+        <item>Hasan Basri Çantay</item>
+        <item>İbni Kesir</item>
+        <item>Muhammed Esed</item>
+        <item>Ömer Nasuhi Bilmen</item>
+        <item>Şaban Piriş</item>
+        <item>Suat Yıldırım</item>
+        <item>Süleyman Ateş</item>
+        <item>Tefhim-ul Kuran</item>
+        <item>Yaşar Nuri Öztürk</item>
+    </string-array>
+
+    <string-array name="table_names">
+        <item>arabic</item>
+        <item>elixan_musayev</item>
+        <item>ziya</item>
+        <item>abdulbaki</item>
+        <item>adem_ugur</item>
+        <item>ali_bulac_1</item>
+        <item>ali_bulac_2</item>
+        <item>ali_fikri_yavuz</item>
+        <item>bekir_sadak</item>
+        <item>celal_yildirim</item>
+        <item>diyanet_isleri</item>
+        <item>diyanet_vakfi</item>
+        <item>edip_yuksel</item>
+        <item>elmalili_hamdi_yazir</item>
+        <item>elmalili_hamdi_yazir_sade_1</item>
+        <item>elmalili_hamdi_yazir_sade_2</item>
+        <item>fizilal_il_kuran</item>
+        <item>gultekin_onan</item>
+        <item>hasan_basri_cantay</item>
+        <item>ibni_kesir</item>
+        <item>muhammed_esed</item>
+        <item>omer_nasuhi_bilmen</item>
+        <item>saban_piris</item>
+        <item>suat_yildirim</item>
+        <item>suleyman_ates</item>
+        <item>tefhim_ul_kuran</item>
+        <item>yasar_nuri_ozturk</item>
+    </string-array>
+
+
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/about"
+        android:orderInCategory="3"
+        android:title="Haqqında"
+        app:showAsAction="withText" />
+
+    <item
+    android:id="@+id/choose_main"
+    android:orderInCategory="1"
+    android:icon="@drawable/ic_settings"
+    app:showAsAction="withText"
+    android:title="Əsas tərcümə"/>
+    <item
+        android:id="@+id/choose_translations"
+        android:orderInCategory="2"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="withText"
+        android:title="Digər tərcümələr"/>
+
+</menu>
