@@ -5,23 +5,23 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
 import com.mirvahidagha.betterbet.Entities.Ayah;
-import com.mirvahidagha.betterbet.Entities.AyahContent;
 import com.mirvahidagha.betterbet.Entities.Surah;
 import com.mirvahidagha.betterbet.Others.MyData;
 import com.mirvahidagha.betterbet.R;
@@ -70,7 +70,6 @@ public class StarFragment extends Fragment {
             @Override
             public void onChanged(List<Ayah> ayahs) {
                 adapter.setAyahs(ayahs);
-                Log.d("vahuuu", "set ayahs");
             }
         });
 
@@ -122,24 +121,23 @@ public class StarFragment extends Fragment {
 
             Ayah currentAyah = ayahs.get(position);
             String[] tables = getResources().getStringArray(R.array.table_names);
-           int currentTableIndex = pref.getInt("main", 0);
-            ayahViewModel.getAyahContent(tables[currentTableIndex], currentAyah.getSura(), currentAyah.getNumber()).observe(getActivity(), new Observer<AyahContent>() {
+            int currentTableIndex = pref.getInt("main", 0);
+            ayahViewModel.getAyahContent(tables[currentTableIndex], currentAyah.getSuraID(), currentAyah.getVerseID()).observe(getActivity(), new Observer<Ayah>() {
                 @Override
-                public void onChanged(AyahContent ayahContent) {
-                    CharSequence text = ayahContent.getAyahText();
+                public void onChanged(Ayah ayah) {
+                    CharSequence text = ayah.getAyahText();
                     holder.ayah.setText(text);
-                    Surah surah = surahs.get(ayahs.get(position).getSura() - 1);
-                    String headerText = surah.getAzeri() + " - " + ayahs.get(position).getNumber();
+                    Surah surah = surahs.get(currentAyah.getSuraID() - 1);
+                    String headerText = surah.getAzeri() + " - " + currentAyah.getVerseID();
                     holder.header.setText(headerText);
                 }
             });
-
 
             holder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Ayah ayah = ayahs.get(position);
-                    EventBus.getDefault().post(new MyData(ayah.getSura(), ayah.getNumber() - 1));
+                    EventBus.getDefault().post(new MyData(ayah.getSuraID(), ayah.getVerseID() - 1));
                 }
             });
         }
@@ -164,9 +162,10 @@ public class StarFragment extends Fragment {
 
             @Override
             public boolean onLongClick(View v) {
-                Ayah currentAyah = ayahs.get(getAdapterPosition());
-                final ArrayList<AyahContent> ayahContents = new ArrayList<>();
-                AyahDialog dialog = new AyahDialog(getContext(), currentAyah, ayahViewModel, selectedBooks);
+                Ayah currentAyah = RecycleAdapter.this.ayahs.get(getAdapterPosition());
+                final ArrayList<Ayah> ayahs = new ArrayList<>();
+
+                AyahDialog dialog = new AyahDialog(getContext(), currentAyah, ayahViewModel, getChosenBooks());
                 final LinearLayout layout = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.ayah_long_press_dialog, null);
                 dialog.setCustomView(layout);
                 dialog.show();

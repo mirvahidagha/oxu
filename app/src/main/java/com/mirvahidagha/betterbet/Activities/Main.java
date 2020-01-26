@@ -3,11 +3,8 @@ package com.mirvahidagha.betterbet.Activities;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -20,9 +17,7 @@ import com.google.android.material.appbar.AppBarLayout;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -31,19 +26,15 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mirvahidagha.betterbet.R;
-import com.mirvahidagha.betterbet.dialog.SweetAlertDialog;
 import com.mirvahidagha.betterbet.fragments.ListenFragment;
 import com.mirvahidagha.betterbet.fragments.LiveFragment;
 import com.mirvahidagha.betterbet.fragments.SearchFragment;
@@ -54,9 +45,7 @@ import com.mirvahidagha.betterbet.tabs.ntb.NavigationTabBar;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Main extends AppCompatActivity {
 
@@ -72,6 +61,7 @@ public class Main extends AppCompatActivity {
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     boolean[] checkedItems;
+    public static String TABLE_NAME="ziya";
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -96,7 +86,7 @@ public class Main extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         title = toolbar.findViewById(R.id.appname);
         title.setTypeface(bold);
-        toolbar.inflateMenu(R.menu.main_menu);
+        toolbar.inflateMenu(R.menu.menu_search);
         toolbar.setBackgroundColor(Color.parseColor(colors[2]));
         title.setText(tabNames[2]);
         setSupportActionBar(toolbar);
@@ -180,9 +170,8 @@ public class Main extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onPageSelected(final int position) {
-
+                title.setVisibility(View.VISIBLE);
                 title.setText(tabNames[position]);
-
                 changeBackground(position);
 
                 if (position != 2) navigationTabBar.show();
@@ -194,6 +183,7 @@ public class Main extends AppCompatActivity {
 
             @Override
             public void onPageScrollStateChanged(final int state) {
+
             }
         });
 
@@ -275,7 +265,6 @@ public class Main extends AppCompatActivity {
         return reChecked;
     }
 
-
     private void chooseMain() {
         final int[] main = {pref.getInt("main", 0)};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -301,12 +290,6 @@ public class Main extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return super.onPrepareOptionsMenu(menu);
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
 
     }
 

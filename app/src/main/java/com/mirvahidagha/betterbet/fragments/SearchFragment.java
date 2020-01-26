@@ -9,7 +9,6 @@ import androidx.appcompat.widget.SearchView;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,11 +24,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.mirvahidagha.betterbet.Entities.Ayah;
-import com.mirvahidagha.betterbet.Entities.AyahContent;
 import com.mirvahidagha.betterbet.Entities.Surah;
 import com.mirvahidagha.betterbet.Others.CombinedLiveData;
 import com.mirvahidagha.betterbet.R;
-import com.mirvahidagha.betterbet.Search.NewsAdapter;
+import com.mirvahidagha.betterbet.Search.SearchAdapter;
 import com.mirvahidagha.betterbet.Search.NewsItem;
 import com.mirvahidagha.betterbet.ViewModels.AyahViewModel;
 import com.mirvahidagha.betterbet.ViewModels.SurahViewModel;
@@ -41,38 +39,23 @@ import java.util.List;
 
 public class SearchFragment extends Fragment {
 
-    private boolean visible;
     private AyahViewModel ayahViewModel;
-    private List<Surah> surahs;
-    private List<Ayah> ayahs;
+    // private List<Surah> surahs;
+    // private List<Ayah> ayahs;
     private RecyclerView recycler;
-    private NewsAdapter adapter;
-    private List<NewsItem> mData;
+    private SearchAdapter adapter;
+    private ArrayList<NewsItem> items;
     private ConstraintLayout rootLayout;
     private SearchView searchView;
     private String[] tables;
     private SharedPreferences pref;
-    private String table;
+    MenuItem menuItem;
     SurahViewModel surahViewModel;
+
+    SharedPreferences.OnSharedPreferenceChangeListener prefListener;
 
     public SearchFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        visible = isVisibleToUser;
-        if (!isVisibleToUser && searchView != null) {
-            searchView.setIconified(true);
-        }
-    }
-
-    @Override
-    public void onOptionsMenuClosed(Menu menu) {
-        super.onOptionsMenuClosed(menu);
-        searchView.clearFocus();
-        menu.close();
     }
 
     @Override
@@ -81,11 +64,10 @@ public class SearchFragment extends Fragment {
         pref = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
         tables = getResources().getStringArray(R.array.table_names);
 
-        table = tables[pref.getInt("main", 1)];
+        //String table = tables[pref.getInt("main", 1)];
 
         ayahViewModel = ViewModelProviders.of(this).get(AyahViewModel.class);
         surahViewModel = ViewModelProviders.of(this).get(SurahViewModel.class);
-
 
     }
 
@@ -97,64 +79,72 @@ public class SearchFragment extends Fragment {
 
         rootLayout = view.findViewById(R.id.root_layout);
         recycler = view.findViewById(R.id.news_rv);
-        mData = new ArrayList<>();
+        items = new ArrayList<>();
 
-        adapter = new NewsAdapter(getContext(), mData);
+        adapter = new SearchAdapter(getContext(), items);
         recycler.setAdapter(adapter);
         StaggeredGridLayoutManager grid = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recycler.setLayoutManager(grid);
-
 
         CombinedLiveData surahsAndAyahs = new CombinedLiveData(surahViewModel.getSurahs(), ayahViewModel.getAllAyahs());
 
         surahsAndAyahs.observe((LifecycleOwner) getContext(), pair -> {
 
             if (pair.second != null && pair.first != null) {
-                ayahViewModel.getAllAyahContent(table).observe(this, ayahContents -> {
-                    ArrayList<NewsItem> items = new ArrayList<>();
+                ayahViewModel.getAllAyahs().observe(this, ayahContents -> {
+                    items = new ArrayList<>();
                     for (int i = 0; i < ayahContents.size(); i++) {
                         Ayah ayah = pair.second.get(i);
-                        String title = pair.first.get(ayah.getSura()-1).getAzeri();
-                        AyahContent content = ayahContents.get(i);
+                        String title = pair.first.get(ayah.getSuraID() - 1).getAzeri();
+                        Ayah content = ayahContents.get(i);
                         items.add(new NewsItem(title, ayah, content));
                     }
                     adapter.setAdapterData(items);
+
                 });
             }
 
         });
 
-//        surahViewModel.getSurahs().observe(this, new Observer<List<Surah>>() {
-//            @Override
-//            public void onChanged(List<Surah> allSurahs) {
-//                surahs = allSurahs;
-//                ayahViewModel.getAllAyahs().observe(getViewLifecycleOwner(), new Observer<List<Ayah>>() {
-//                    @Override
-//                    public void onChanged(List<Ayah> allAyahs) {
-//                        ayahs = allAyahs;
-//                        mData = new ArrayList<>();
-//
-//                        for (Ayah ayah :
-//                                ayahs) {
-//                            mData.add(new NewsItem(surahs.get(ayah.getSura() - 1).getAzeri(), ayah, ayah.getNumber(), ));
-//                            newsAdapter.setAdapterData(mData);
-//                        }
-//
-//                    }
-//                });
-//            }
-//        });
+        prefListener = (prf, key) ->
+        {
+            if (key == "main") updateAyahContent(prf.getInt("main", 2));
+        };
+
+        pref.registerOnSharedPreferenceChangeListener(prefListener);
 
         return view;
     }
 
+    private void updateAyahContent(int tableIndex) {
+
+        ayahViewModel.getAllAyahs().observe(this, new Observer<List<Ayah>>() {
+            @Override
+            public void onChanged(List<Ayah> ayahs) {
+                for (int i = 0; i < items.size(); i++)
+                    items.get(i).setAyah(ayahs.get(i));
+                adapter.setAdapterData(items);
+            }
+        });
+
+    }
+
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
+    public void onDestroyView() {
+        super.onDestroyView();
+        pref.unregisterOnSharedPreferenceChangeListener(prefListener);
+    }
 
-        if (visible) {
-            MenuItem menuItem = menu.findItem(R.id.menu_action_search);
+    private boolean isFirst = true;
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        if (!isFirst) {
+            inflater = getActivity().getMenuInflater();
+            inflater.inflate(R.menu.menu_search, menu);
+
+            menuItem = menu.findItem(R.id.menu_action_search);
             searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
 
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -180,18 +170,8 @@ public class SearchFragment extends Fragment {
                 return false;
             });
 
-        } else {
-            searchView = null;
         }
-
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
-        inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
+        isFirst = false;
     }
 
 }

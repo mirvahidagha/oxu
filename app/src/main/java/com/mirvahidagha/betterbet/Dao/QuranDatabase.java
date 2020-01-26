@@ -11,10 +11,9 @@ import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.mirvahidagha.betterbet.Entities.Ayah;
-import com.mirvahidagha.betterbet.Entities.AyahContent;
 import com.mirvahidagha.betterbet.Entities.Surah;
 
-@Database(entities = {Ayah.class, Surah.class, AyahContent.class}, version = 1, exportSchema = false)
+@Database(entities = {Surah.class, Ayah.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class QuranDatabase extends RoomDatabase {
 

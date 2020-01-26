@@ -7,7 +7,6 @@ import androidx.lifecycle.MediatorLiveData;
 import com.mirvahidagha.betterbet.Entities.Ayah;
 import com.mirvahidagha.betterbet.Entities.Surah;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CombinedLiveData extends MediatorLiveData<Pair<List<Surah>, List<Ayah>>> {

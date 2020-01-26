@@ -4,11 +4,9 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,13 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.mirvahidagha.betterbet.Entities.Ayah;
-import com.mirvahidagha.betterbet.Entities.AyahContent;
 import com.mirvahidagha.betterbet.R;
 import com.mirvahidagha.betterbet.ViewModels.AyahViewModel;
-import com.mirvahidagha.betterbet.fragments.AyahsFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AyahDialog extends SweetAlertDialog implements View.OnClickListener {
     MaterialButton copy, star;
@@ -35,7 +30,7 @@ public class AyahDialog extends SweetAlertDialog implements View.OnClickListener
     Context context;
     AyahViewModel viewModel;
     Ayah ayah;
-    ArrayList<AyahContent> otherAyahs;
+    ArrayList<Ayah> otherAyahs;
     ArrayList<String> tables;
     GridLayoutManager   grid;
 
@@ -54,16 +49,16 @@ public class AyahDialog extends SweetAlertDialog implements View.OnClickListener
         otherAyahs = new ArrayList<>();
 
         DialogAdapter adapter = new DialogAdapter();
-        Observer<AyahContent> observer = new Observer<AyahContent>() {
+        Observer<Ayah> observer = new Observer<Ayah>() {
             @Override
-            public void onChanged(AyahContent ayahContent) {
+            public void onChanged(Ayah ayahContent) {
                 otherAyahs.add(ayahContent);
                 adapter.updateItems(otherAyahs);
             }
         };
 
-        for (LiveData<AyahContent> ayahContentLiveData :
-                viewModel.getAyahContent(tables, ayah.getSura(), ayah.getNumber())) {
+        for (LiveData<Ayah> ayahContentLiveData :
+                viewModel.getAyahContent(tables, ayah.getSuraID(), ayah.getVerseID())) {
 
             ayahContentLiveData.observe((LifecycleOwner) context, observer);
         }
@@ -89,7 +84,7 @@ public class AyahDialog extends SweetAlertDialog implements View.OnClickListener
         copy.setOnClickListener(this);
         star.setOnClickListener(this);
 
-        if(ayah.getStarred()==1)
+        if(ayah.getStar()==1)
         star.setText("Ulduzu sil");
 
 
@@ -126,14 +121,14 @@ public class AyahDialog extends SweetAlertDialog implements View.OnClickListener
     }
 
     void starAyah(int number) {
-        if (ayah.getStarred() == 0)
-            ayah.setStarred(1);
-        else ayah.setStarred(0);
+        if (ayah.getStar() == 0)
+            ayah.setStar(1);
+        else ayah.setStar(0);
         viewModel.update(ayah);
     }
 
     public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.ViewHolder> {
-        ArrayList<AyahContent> arrayList = new ArrayList<>();
+        ArrayList<Ayah> arrayList = new ArrayList<>();
 
         @NonNull
         @Override
@@ -149,8 +144,8 @@ public class AyahDialog extends SweetAlertDialog implements View.OnClickListener
 
         }
 
-        public void updateItems(ArrayList<AyahContent> ayahContents) {
-            arrayList = ayahContents;
+        public void updateItems(ArrayList<Ayah> ayahs) {
+            arrayList = ayahs;
             notifyDataSetChanged();
         }
 

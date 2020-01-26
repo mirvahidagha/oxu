@@ -4,11 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.mirvahidagha.betterbet.Entities.Ayah;
-
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 
 @Entity(tableName = "surahs")
 public class Surah {

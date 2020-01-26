@@ -25,6 +25,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mirvahidagha.betterbet.Others.DBHelper;
 import com.mirvahidagha.betterbet.Entities.Surah;
@@ -47,6 +48,7 @@ public class SurahsFragment extends Fragment {
     SearchView searchView;
     RecycleAdapter adapter;
     boolean visible;
+    MenuItem menuItem;
 
     public SurahsFragment() {
         // Required empty public constructor
@@ -78,22 +80,6 @@ public class SurahsFragment extends Fragment {
 
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        visible = isVisibleToUser;
-        if (!isVisibleToUser) {
-            searchView.clearFocus();
-            searchView.setIconified(true);
-        }
-    }
-
-    @Override
-    public void onOptionsMenuClosed(Menu menu) {
-        super.onOptionsMenuClosed(menu);
-        searchView.clearFocus();
-        menu.close();
-    }
-    @Override
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
@@ -117,6 +103,7 @@ public class SurahsFragment extends Fragment {
         recyclerView.setVisibility(View.INVISIBLE);
         trans.commit();
     }
+
     @Subscribe
     public void customEventReceived(String event) {
         recyclerView.setVisibility(event.equals("empty") ? View.VISIBLE : View.INVISIBLE);
@@ -256,8 +243,7 @@ public class SurahsFragment extends Fragment {
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-        if (visible) {
-            MenuItem menuItem = menu.findItem(R.id.menu_action_search);
+            menuItem = menu.findItem(R.id.menu_action_surahs);
 
             searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
 
@@ -280,7 +266,6 @@ public class SurahsFragment extends Fragment {
                     EventBus.getDefault().post(true);
                 }
             });
-
             searchView.setOnCloseListener(new SearchView.OnCloseListener() {
                 @Override
                 public boolean onClose() {
@@ -290,25 +275,13 @@ public class SurahsFragment extends Fragment {
                 }
             });
 
-        } else {
-            searchView = null;
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-
-
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
         inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-
+        inflater.inflate(R.menu.menu_surahs, menu);
     }
 
 }

@@ -1,9 +1,5 @@
 package com.mirvahidagha.betterbet.Others;
 
-import com.mirvahidagha.betterbet.Entities.Ayah;
-
-import java.util.ArrayList;
-
 public class MyData {
 
     public MyData(int surahId, int scrollPosition) {

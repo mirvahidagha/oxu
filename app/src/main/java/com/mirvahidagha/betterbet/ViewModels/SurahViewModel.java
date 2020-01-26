@@ -7,7 +7,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.mirvahidagha.betterbet.Dao.QuranRepository;
-import com.mirvahidagha.betterbet.Entities.Ayah;
 import com.mirvahidagha.betterbet.Entities.Surah;
 
 import java.util.List;

@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mirvahidagha.betterbet.Entities.Ayah;
-import com.mirvahidagha.betterbet.Entities.AyahContent;
 import com.mirvahidagha.betterbet.Entities.Surah;
 import com.mirvahidagha.betterbet.Others.Just;
 import com.mirvahidagha.betterbet.R;
@@ -39,7 +37,7 @@ public class AyahsFragment extends Fragment {
     RecyclerView recycler;
     RecycleAdapter adapter;
     Surah currentSurah;
-    AyahContent ayahContent;
+    Ayah ayah;
     SurahViewModel surahViewModel;
     int scrollItem, surahNumber;
     boolean scrolled;
@@ -48,12 +46,11 @@ public class AyahsFragment extends Fragment {
     SharedPreferences pref;
     String[] translations;
     ArrayList<String> selectedBooks;
+    SharedPreferences.OnSharedPreferenceChangeListener prefListener;
 
     public AyahsFragment() {
         // Required empty public constructor
     }
-
-
 
     public AyahsFragment getInstance(int surahId, int scrollPosition) {
         instance = new AyahsFragment();
@@ -68,7 +65,7 @@ public class AyahsFragment extends Fragment {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                grid.scrollToPositionWithOffset(scrollItem, 0);
+                // grid.scrollToPositionWithOffset(scrollItem, 0);
             }
         };
         runnable.run();
@@ -106,22 +103,14 @@ public class AyahsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // setHasOptionsMenu(true);
-        View view = inflater.inflate(R.layout.fragment_blank, container, false);
+        View view = inflater.inflate(R.layout.ayahs_fragment, container, false);
 
         recycler = view.findViewById(R.id.recycler_ayahs);
         adapter = new RecycleAdapter();
         grid = new GridLayoutManager(view.getContext(), 1);
-
-        viewModel.getAyahs(surahNumber).observe(this, new Observer<List<Ayah>>() {
-            @Override
-            public void onChanged(List<Ayah> ayahs) {
-                adapter.setAyahs(ayahs);
-                if (!scrolled)
-                    grid.scrollToPositionWithOffset(scrollItem, 0);
-                scrolled = true;
-            }
-        });
-
+        recycler.setHasFixedSize(true);
+        recycler.setLayoutManager(grid);
+        recycler.setAdapter(adapter);
         surahViewModel.getSurahs().observe(this, new Observer<List<Surah>>() {
             @Override
             public void onChanged(List<Surah> surah) {
@@ -130,22 +119,39 @@ public class AyahsFragment extends Fragment {
             }
         });
 
-        recycler.setHasFixedSize(true);
-        recycler.setLayoutManager(grid);
-        recycler.setAdapter(adapter);
+        Observer observer = new Observer<List<Ayah>>() {
+            @Override
+            public void onChanged(List<Ayah> ayahs) {
+                adapter.setAyahs(ayahs);
+                if (!scrolled)
+                    grid.scrollToPositionWithOffset(scrollItem, 0);
+                scrolled = true;
+            }
+        };
+        viewModel.getAyahs(surahNumber).observe(this, observer);
 
+        prefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                viewModel.getAyahs(surahNumber).observe(getViewLifecycleOwner(), observer);
+
+            }
+        };
+        pref.registerOnSharedPreferenceChangeListener(prefListener);
         return view;
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        pref.unregisterOnSharedPreferenceChangeListener(prefListener);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         EventBus.getDefault().post(new Just());
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
     }
 
     @Override
@@ -163,7 +169,6 @@ public class AyahsFragment extends Fragment {
     @Subscribe
     public void customEventReceived(Just just) {
         EventBus.getDefault().post(currentSurah.getAzeri());
-
     }
 
     @Override
@@ -172,8 +177,7 @@ public class AyahsFragment extends Fragment {
         EventBus.getDefault().post("empty");
     }
 
-    public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder> {
-
+    public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder>{
         List<Ayah> ayahs = new ArrayList<>();
 
         @NotNull
@@ -190,17 +194,12 @@ public class AyahsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(final RecycleAdapter.ViewHolder holder, final int position) {
-            viewModel.getAyahContent(translations[pref.getInt("main", 0)], surahNumber, position + 1).observe(getViewLifecycleOwner(), new Observer<AyahContent>() {
-                @Override
-                public void onChanged(AyahContent ayahContent) {
-                    String text = String.valueOf(position + 1) + ". " + ayahContent.getAyahText();
-                    if (ayahs.get(position).getStarred() == 1)
-                        text = "★" + text;
-                    holder.ayah.setText(text);
-                }
-            });
 
-
+            ayah = ayahs.get(position);
+            String text = String.valueOf(position + 1) + ". " + ayah.getAyahText();
+            if (ayah.getStar() == 1)
+                text = "★" + text;
+            holder.ayah.setText(text);
         }
 
         @Override
@@ -220,9 +219,9 @@ public class AyahsFragment extends Fragment {
 
             @Override
             public boolean onLongClick(View v) {
-                Ayah currentAyah = ayahs.get(getAdapterPosition());
-                final ArrayList<AyahContent> ayahContents = new ArrayList<>();
-                AyahDialog dialog = new AyahDialog(getContext(), currentAyah, viewModel, selectedBooks);
+                Ayah currentAyah = RecycleAdapter.this.ayahs.get(getAdapterPosition());
+                final ArrayList<Ayah> ayahs = new ArrayList<>();
+                AyahDialog dialog = new AyahDialog(getContext(), currentAyah, viewModel, getChosenBooks());
                 final LinearLayout layout = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.ayah_long_press_dialog, null);
                 dialog.setCustomView(layout);
 

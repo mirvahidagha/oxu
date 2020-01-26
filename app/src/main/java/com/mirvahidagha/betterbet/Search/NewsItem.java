@@ -1,7 +1,6 @@
 package com.mirvahidagha.betterbet.Search;
 
 import com.mirvahidagha.betterbet.Entities.Ayah;
-import com.mirvahidagha.betterbet.Entities.AyahContent;
 
 public class NewsItem {
 
@@ -10,21 +9,15 @@ public class NewsItem {
 
     Ayah ayah;
 
-    public AyahContent getAyahContent() {
-        return ayahContent;
+    public Ayah getAyah() {
+        return ayah;
     }
 
-    public NewsItem(String title, Ayah ayah, AyahContent ayahContent) {
+    public NewsItem(String title, Ayah ayah, Ayah ayahContent) {
         Title = title;
         this.ayah = ayah;
-        this.ayahContent = ayahContent;
+        this.ayah = ayahContent;
     }
-
-    public void setAyahContent(AyahContent ayahContent) {
-        this.ayahContent = ayahContent;
-    }
-
-    AyahContent ayahContent;
 
     public NewsItem() {
     }
@@ -39,10 +32,6 @@ public class NewsItem {
 
     public String getTitle() {
         return Title;
-    }
-
-    public Ayah getAyah() {
-        return ayah;
     }
 
 }

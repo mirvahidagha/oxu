@@ -4,9 +4,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card"
+    android:layout_marginTop="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="8dp"
+    android:background="@drawable/custom_dialog_style"
     android:layout_marginRight="8dp">
 
     <TextView
@@ -19,7 +21,7 @@
         android:paddingRight="16dp"
         android:paddingLeft="16dp"
         android:text="15"
-        android:textColor="@color/color_text"
+        android:textColor="@color/message_color_dark"
         android:textSize="15sp"
         android:textStyle="normal" />
 
