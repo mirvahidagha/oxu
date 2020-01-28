@@ -49,8 +49,9 @@ public class StarFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_star, container, false);
-        //   GridLayoutManager grid = new GridLayoutManager(getActivity(), 2);
+        //GridLayoutManager grid = new GridLayoutManager(getActivity(), 2);
         recyclerView = rootView.findViewById(R.id.recycler_ayahs);
+        setHasOptionsMenu(true);
         StaggeredGridLayoutManager grid = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(grid);
         recyclerView.setHasFixedSize(true);

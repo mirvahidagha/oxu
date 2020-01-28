@@ -6,9 +6,15 @@
         android:id="@+id/menu_action_surahs"
         android:orderInCategory="1"
         android:icon="@drawable/ic_search"
-        app:iconTint="#008aff"
         app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         android:title="Axtar"/>
+
+    <item
+        android:id="@+id/action_surahs_order"
+        android:orderInCategory="2"
+        android:icon="@drawable/quran_order"
+        app:showAsAction="ifRoom"
+        android:title="Sıralama"/>
 
 </menu>

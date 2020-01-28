@@ -118,22 +118,22 @@ public class AyahDialog extends SweetAlertDialog implements View.OnClickListener
                 Toast.makeText(context, "Ayə kopyalandı.", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.star:
-                cancel();
                 starAyah(ayah.getId());
+                cancel();
                 break;
 
         }
     }
 
 
-    void starAyah(int number) {
+    private void starAyah(int number) {
         if (ayah.getStar() == 0)
             ayah.setStar(1);
         else ayah.setStar(0);
         viewModel.update(ayah);
     }
 
-    void copyText(String text) {
+    private void copyText(String text) {
 
         text += "\n\n\t" + "Quran (" + ayah.getSuraID() + ":" + ayah.getVerseID() + ")";
         ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
@@ -183,7 +183,7 @@ public class AyahDialog extends SweetAlertDialog implements View.OnClickListener
 
         }
 
-        public void updateItems(ArrayList<Ayah> ayahs) {
+         void updateItems(ArrayList<Ayah> ayahs) {
             arrayList = ayahs;
             Collections.sort(arrayList);
             notifyDataSetChanged();
@@ -194,7 +194,7 @@ public class AyahDialog extends SweetAlertDialog implements View.OnClickListener
             return arrayList.size();
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
+         class ViewHolder extends RecyclerView.ViewHolder {
             TextView ayah, header;
             ConstraintLayout item;
 

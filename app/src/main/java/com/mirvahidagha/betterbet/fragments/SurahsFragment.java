@@ -29,10 +29,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mirvahidagha.betterbet.Others.AlphabetSurahOrder;
 import com.mirvahidagha.betterbet.Others.DBHelper;
 import com.mirvahidagha.betterbet.Entities.Surah;
 import com.mirvahidagha.betterbet.Others.MyData;
+import com.mirvahidagha.betterbet.Others.OriginalSurahOrder;
 import com.mirvahidagha.betterbet.Others.RecyclerAyah;
+import com.mirvahidagha.betterbet.Others.SurahNazilOrder;
 import com.mirvahidagha.betterbet.R;
 import com.mirvahidagha.betterbet.ViewModels.SurahViewModel;
 import com.mirvahidagha.betterbet.dialog.BetterDialog;
@@ -42,6 +45,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SurahsFragment extends Fragment {
@@ -50,9 +54,10 @@ public class SurahsFragment extends Fragment {
     SurahViewModel viewModel;
     SearchView searchView;
     RecycleAdapter adapter;
-    boolean visible;
+    short cycle = 1;
     MenuItem menuItem;
     private Typeface bold, regular, light;
+    ArrayList<Surah> surahs = new ArrayList<>();
 
     public SurahsFragment() {
         // Required empty public constructor
@@ -80,11 +85,13 @@ public class SurahsFragment extends Fragment {
         recyclerView.setLayoutManager(grid);
         adapter = new RecycleAdapter();
         recyclerView.setAdapter(adapter);
+
         viewModel = ViewModelProviders.of(this).get(SurahViewModel.class);
         viewModel.getSurahs().observe(this, new Observer<List<Surah>>() {
             @Override
-            public void onChanged(List<Surah> surahs) {
-                adapter.setSurahs(surahs);
+            public void onChanged(List<Surah> surahList) {
+                surahs.addAll(surahList);
+                adapter.setSurahs(surahList);
             }
         });
 
@@ -160,7 +167,7 @@ public class SurahsFragment extends Fragment {
 //          holder.order.setText("Sırası: " + order);
             String count = String.valueOf(surah.getCount());
             String place = String.valueOf(surah.getPlace());
-            String placeCount = String.format("%sdə nazil olub, %s ayədir.",place, count );
+            String placeCount = String.format("%sdə nazil olub, %s ayədir.", place, count);
 
             holder.count.setText(placeCount);
             holder.number.setText(String.valueOf(position + 1));
@@ -305,4 +312,38 @@ public class SurahsFragment extends Fragment {
         inflater.inflate(R.menu.menu_surahs, menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.action_surahs_order) {
+
+            switch (++cycle % 3) {
+                case 0:
+                    Collections.sort(surahs, new SurahNazilOrder());
+                    adapter.setSurahs(surahs);
+                    item.setIcon(getResources().getDrawable(R.drawable.ic_nazilolma));
+                    break;
+                case 1:
+                    Collections.sort(surahs, new AlphabetSurahOrder());
+                    adapter.setSurahs(surahs);
+                    item.setIcon(getResources().getDrawable(R.drawable.ic_sort_by_abc));
+
+                    break;
+                case 2:
+                    Collections.sort(surahs, new OriginalSurahOrder());
+                    adapter.setSurahs(surahs);
+                    item.setIcon(getResources().getDrawable(R.drawable.quran_order));
+
+                    break;
+            }
+
+        }
+
+        return super.onOptionsItemSelected(item);
+
+    }
+
+    int cycle() {
+        return ++cycle % 3;
+    }
 }
