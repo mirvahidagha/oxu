@@ -16,9 +16,6 @@ import com.mirvahidagha.betterbet.Entities.Surah;
 @androidx.room.Dao
 public interface QuranDao {
 
-    @Update
-    void updateAyah(Ayah ayah);
-
     @Transaction
     @Query("SELECT * FROM surahs")
     public LiveData<List<Surah>> getSurahs();
@@ -34,5 +31,10 @@ public interface QuranDao {
 
     @RawQuery(observedEntities = Ayah.class)
     LiveData<List<Ayah>> getAllAyahs(SupportSQLiteQuery query);
+
+    @RawQuery(observedEntities = Ayah.class)
+    int updateAyah(SupportSQLiteQuery query);
+
+
 
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.sqlite.db.SimpleSQLiteQuery;
 
@@ -32,22 +33,26 @@ public class QuranRepository {
     }
 
     public void update(Ayah ayah) {
-        new UpdateAsyncTask(quranDao).execute(ayah);
+
+        String queryString = "update " + table() + " set star=" + Math.abs(ayah.getStar() - 1) + " where id=" + ayah.getId();
+        SimpleSQLiteQuery query = new SimpleSQLiteQuery(queryString);
+
+        new UpdateAsyncTask(quranDao).execute(query);
     }
 
     public LiveData<List<Ayah>> getAllAyahs(int surahNumber) {
-        String queryString = "select * from "+table()+" where SuraID="+surahNumber;
+        String queryString = "select * from " + table() + " where SuraID=" + surahNumber;
         SimpleSQLiteQuery query = new SimpleSQLiteQuery(queryString);
         return quranDao.getAllAyahs(query);
     }
 
-    private String table(){
-        String tables[]=context.getResources().getStringArray(R.array.table_names);
-        return tables[pref.getInt("main", 3)];
+    private String table() {
+        String tables[] = context.getResources().getStringArray(R.array.table_names);
+        return tables[pref.getInt("main", 1)];
     }
 
     public LiveData<List<Ayah>> getStarredAyahs() {
-        String queryString = "select * from "+table()+" where star='1'";
+        String queryString = "select * from " + table() + " where star='1'";
         SimpleSQLiteQuery query = new SimpleSQLiteQuery(queryString);
         return quranDao.getStarredAyahs(query);
     }
@@ -69,7 +74,7 @@ public class QuranRepository {
         return quranDao.getAyahContent(query);
     }
 
-    private static class UpdateAsyncTask extends AsyncTask<Ayah, Void, Void> {
+    private static class UpdateAsyncTask extends AsyncTask<SimpleSQLiteQuery, Void, Void> {
 
         private QuranDao quranDao;
 
@@ -78,10 +83,11 @@ public class QuranRepository {
         }
 
         @Override
-        protected Void doInBackground(Ayah... ayahs) {
-            quranDao.updateAyah(ayahs[0]);
+        protected Void doInBackground(SimpleSQLiteQuery... query) {
+            quranDao.updateAyah(query[0]);
             return null;
         }
+
     }
 
     public ArrayList<LiveData<Ayah>> getOtherAyahs(ArrayList<String> tables, int surahNumber, int ayahNumber) {

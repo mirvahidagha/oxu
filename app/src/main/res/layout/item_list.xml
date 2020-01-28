@@ -13,7 +13,6 @@
     app:cardMaxElevation="2dp">
 
     <RelativeLayout
-        android:id="@+id/red_and_green"
         android:layout_width="50dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
@@ -38,13 +37,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="105dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="4dp"
         android:orientation="vertical"
-        android:paddingTop="10dp">
+        android:paddingTop="8dp">
 
         <TextView
 
@@ -54,7 +53,7 @@
             android:layout_gravity="center_horizontal"
              android:text="Ərəbcə"
             android:textColor="@color/color_text"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <TextView
@@ -80,28 +79,16 @@
            />
 
         <TextView
-            android:id="@+id/sura_count"
+            android:id="@+id/count_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="sans-serif-thin"
             android:text="Ayə sayı"
             android:textColor="@color/color_text"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/sura_place"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:fontFamily="sans-serif-thin"
-            android:text="Məkkə"
-            android:textColor="@color/color_text"
-            android:textSize="12sp"
-            android:textStyle="bold"
-
-            />
 
     </LinearLayout>
 

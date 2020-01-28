@@ -121,7 +121,7 @@ public class StarFragment extends Fragment {
 
             Ayah currentAyah = ayahs.get(position);
             String[] tables = getResources().getStringArray(R.array.table_names);
-            int currentTableIndex = pref.getInt("main", 0);
+            int currentTableIndex = pref.getInt("main", 1);
             ayahViewModel.getAyahContent(tables[currentTableIndex], currentAyah.getSuraID(), currentAyah.getVerseID()).observe(getActivity(), new Observer<Ayah>() {
                 @Override
                 public void onChanged(Ayah ayah) {
@@ -162,13 +162,16 @@ public class StarFragment extends Fragment {
 
             @Override
             public boolean onLongClick(View v) {
-                Ayah currentAyah = RecycleAdapter.this.ayahs.get(getAdapterPosition());
-                final ArrayList<Ayah> ayahs = new ArrayList<>();
-
-                AyahDialog dialog = new AyahDialog(getContext(), currentAyah, ayahViewModel, getChosenBooks());
-                final LinearLayout layout = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.ayah_long_press_dialog, null);
-                dialog.setCustomView(layout);
-                dialog.show();
+//                Ayah currentAyah = RecycleAdapter.this.ayahs.get(getAdapterPosition());
+//                final ArrayList<Ayah> ayahs = new ArrayList<>();
+//
+//                AyahDialog dialog = new AyahDialog(getContext(),
+//                        surahs.get(
+//                                ayahs.get(getAdapterPosition()).getSuraID() - 1),
+//                        currentAyah, ayahViewModel, getChosenBooks());
+//                final RelativeLayout layout = (RelativeLayout) getActivity().getLayoutInflater().inflate(R.layout.ayah_long_press_dialog, null);
+//                dialog.setCustomView(layout);
+//                dialog.show();
                 return false;
             }
         }

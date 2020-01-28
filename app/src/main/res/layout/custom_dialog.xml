@@ -4,21 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:background="@drawable/custom_dialog_style"
-    android:orientation="horizontal"
-    android:paddingLeft="4dp"
-    android:paddingTop="4dp"
-    android:paddingRight="4dp">
+    android:orientation="horizontal">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.mirvahidagha.betterbet.Others.RecyclerAyah
         android:id="@+id/recycler_dialog"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         tools:listitem="@layout/item_ayah">
 
-    </androidx.recyclerview.widget.RecyclerView>
+    </com.mirvahidagha.betterbet.Others.RecyclerAyah>
 
 
 </LinearLayout>

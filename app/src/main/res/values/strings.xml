@@ -17,22 +17,23 @@
     <string name="title_activity_settings">Tənzimləmələr</string>
 
     <string-array name="translations">
-        <item>Arabic (Original)</item>
-        <item>Əlixan Musayev</item>
+        <item>Orijinal</item>
         <item>Ziya Bünyadov - Vasim Məmmədəliyev</item>
-        <item>Abdulbaki Gölpınarlı</item>
+        <item>Yaşar Nuri Öztürk</item>
+        <item>Edip Yüksel</item>
+        <item>Əlixan Musayev</item>
         <item>Adem Uğur</item>
-        <item>Ali Bulaç - 1</item>
-        <item>Ali Bulaç - 2</item>
+        <item>Ali Bulaç-1</item>
+        <item>Ali Bulaç-2</item>
         <item>Ali Fikri Yavuz</item>
         <item>Bekir Sadak</item>
         <item>Celal Yıldırım</item>
         <item>Diyanet işleri</item>
         <item>Diyanet vakfı</item>
-        <item>Edip Yüksel</item>
+        <item>Abdulbaki Gölpınarlı</item>
         <item>Elmalılı Hamdi Yazır</item>
-        <item>Elmalılı Hamdi Yazır (sadələşdirilmiş -1)</item>
-        <item>Elmalılı Hamdi Yazır (sadələşdirilmiş -2)</item>
+        <item>Elmalılı Hamdi Yazır-1</item>
+        <item>Elmalılı Hamdi Yazır-2</item>
         <item>Fizilal-il Kuran</item>
         <item>Gültekin Onan</item>
         <item>Hasan Basri Çantay</item>
@@ -43,14 +44,14 @@
         <item>Suat Yıldırım</item>
         <item>Süleyman Ateş</item>
         <item>Tefhim-ul Kuran</item>
-        <item>Yaşar Nuri Öztürk</item>
     </string-array>
 
     <string-array name="table_names">
         <item>arabic</item>
-        <item>elixan_musayev</item>
         <item>ziya</item>
-        <item>abdulbaki</item>
+        <item>yasar_nuri_ozturk</item>
+        <item>edip_yuksel</item>
+        <item>elixan_musayev</item>
         <item>adem_ugur</item>
         <item>ali_bulac_1</item>
         <item>ali_bulac_2</item>
@@ -59,7 +60,7 @@
         <item>celal_yildirim</item>
         <item>diyanet_isleri</item>
         <item>diyanet_vakfi</item>
-        <item>edip_yuksel</item>
+        <item>abdulbaki</item>
         <item>elmalili_hamdi_yazir</item>
         <item>elmalili_hamdi_yazir_sade_1</item>
         <item>elmalili_hamdi_yazir_sade_2</item>
@@ -73,7 +74,6 @@
         <item>suat_yildirim</item>
         <item>suleyman_ates</item>
         <item>tefhim_ul_kuran</item>
-        <item>yasar_nuri_ozturk</item>
     </string-array>
 
 

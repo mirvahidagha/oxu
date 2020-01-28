@@ -75,9 +75,11 @@ public class Main extends AppCompatActivity {
         editor.apply();
         translations = getResources().getStringArray(R.array.translations);
         checkedItems = getCheckedItems();
-        colors = getResources().getStringArray(R.array.tab_colors);
+
+
+        colors = getResources().getStringArray(R.array.rengler);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.main);
-        //  coordinatorLayout.setBackgroundColor(Color.parseColor(colors[2]));
+        coordinatorLayout.setBackgroundColor(Color.parseColor(colors[2]));
         AppBarLayout appbar = (AppBarLayout) findViewById(R.id.appbar);
         bold = Typeface.createFromAsset(getAssets(), "bold.ttf");
         regular = Typeface.createFromAsset(getAssets(), "regular.ttf");
@@ -305,6 +307,7 @@ public class Main extends AppCompatActivity {
             @Override
             public void onAnimationUpdate(ValueAnimator animator) {
                 toolbar.setBackgroundColor((int) animator.getAnimatedValue());
+                coordinatorLayout.setBackgroundColor((int) animator.getAnimatedValue());
             }
         });
 

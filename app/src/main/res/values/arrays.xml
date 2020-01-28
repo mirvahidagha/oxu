@@ -8,14 +8,6 @@
         <item>#82b48d</item>
     </string-array>
 
-    <string-array name="tab_colors1">
-        <item>#df5a55</item>
-        <item>#f9bb72</item>
-        <item>#76afcf</item>
-        <item>#dd6495</item>
-        <item>#72d3b4</item>
-    </string-array>
-
     <string-array name="tab_names">
         <item>Mövzular</item>
         <item>Axtar</item>
@@ -24,150 +16,12 @@
         <item>Dinlə</item>
     </string-array>
 
-    <string-array name="colors1">
-        <item>#d20962</item>
-        <item>#f47721</item>
-        <item>#7ac143</item>
-        <item>#00a78e</item>
-        <item>#00bce4</item>
-        <item>#7d3f98</item>
-    </string-array>
-
-    <string-array name="colors2">
-        <item>#6d5988</item>
-        <item>#3eabc0</item>
-        <item>#289a91</item>
-        <item>#82b48d</item>
-        <item>#ca8f68</item>
-        <item>#b23876</item>
-    </string-array>
-
-    <string-array name="colors3">
-        <item>#00758a</item>
-        <item>#006d59</item>
-        <item>#3e7f37</item>
-        <item>#974527</item>
-        <item>#890043</item>
-        <item>#530e58</item>
-    </string-array>
-
-
-    <string-array name="surah">
-        <item>Fatihə</item>
-        <item>Bəqərə</item>
-        <item>Ali İmran</item>
-        <item>Nisa</item>
-        <item>Maidə</item>
-        <item>Ənam</item>
-        <item>Əraf</item>
-        <item>Ənfal</item>
-        <item>Tovbə</item>
-        <item>Yunus</item>
-        <item>Hud</item>
-        <item>Yusuf</item>
-        <item>Rad</item>
-        <item>İbrahim</item>
-        <item>Hicr</item>
-        <item>Nəhl</item>
-        <item>İsra</item>
-        <item>Kəhf</item>
-        <item>Məryəm</item>
-        <item>Ta ha</item>
-        <item>Ənbiya</item>
-        <item>Həcc</item>
-        <item>Muminun</item>
-        <item>Nur</item>
-        <item>Furqan</item>
-        <item>Şuəra</item>
-        <item>Nəml</item>
-        <item>Qasas</item>
-        <item>Ənkəbut</item>
-        <item>Rum</item>
-        <item>Loğman</item>
-        <item>Səcdə</item>
-        <item>Əhzab</item>
-        <item>Səba</item>
-        <item>Fatir</item>
-        <item>Ya sin</item>
-        <item>Saffat</item>
-        <item>Sad</item>
-        <item>Zumər</item>
-        <item>Ğafir</item>
-        <item>Fussilət</item>
-        <item>Şura</item>
-        <item>Zuxruf</item>
-        <item>Duxan</item>
-        <item>Casiyə</item>
-        <item>Əhqaf</item>
-        <item>Muhəmməd</item>
-        <item>Fəth</item>
-        <item>Hucurat</item>
-        <item>Qaf</item>
-        <item>Zəriyət</item>
-        <item>Tur</item>
-        <item>Nəcm</item>
-        <item>Qamər</item>
-        <item>Rahmən</item>
-        <item>Vaqiə</item>
-        <item>Hədid</item>
-        <item>Mucadilə</item>
-        <item>Həşr</item>
-        <item>Mumtəhənə</item>
-        <item>Saff</item>
-        <item>Cumuə</item>
-        <item>Munafiqun</item>
-        <item>Təğabun</item>
-        <item>Talaq</item>
-        <item>Təhrim</item>
-        <item>Mulk</item>
-        <item>Qaləm</item>
-        <item>Haqqə</item>
-        <item>Məaric</item>
-        <item>Nuh</item>
-        <item>Cinn</item>
-        <item>Muzzəmmil</item>
-        <item>Muddəssir</item>
-        <item>Qiyamə</item>
-        <item>İnsan</item>
-        <item>Mursəlat</item>
-        <item>Nəbə</item>
-        <item>Naziat</item>
-        <item>Əbəsə</item>
-        <item>Təkvir</item>
-        <item>İnfitar</item>
-        <item>Mutaffifin</item>
-        <item>İnşiqaq</item>
-        <item>Buruc</item>
-        <item>Tariq</item>
-        <item>Əla</item>
-        <item>Ğaşiyə</item>
-        <item>Fəcr</item>
-        <item>Bələd</item>
-        <item>Şəms</item>
-        <item>Leyl</item>
-        <item>Duha</item>
-        <item>Şərh</item>
-        <item>Tin</item>
-        <item>Ələq</item>
-        <item>Qədr</item>
-        <item>Beyyinə</item>
-        <item>Zəlzələ</item>
-        <item>Adiyat</item>
-        <item>Qariə</item>
-        <item>Təkasur</item>
-        <item>Əsr</item>
-        <item>Huməzə</item>
-        <item>Fil</item>
-        <item>Qureyş</item>
-        <item>Maun</item>
-        <item>Kovsər</item>
-        <item>Kafirun</item>
-        <item>Nəsr</item>
-        <item>Məsəd</item>
-        <item>İxlas</item>
-        <item>Fələq</item>
-        <item>Nas</item>
-
+    <string-array name="rengler">
+        <item>#FFE36D</item>
+        <item>#8660D7</item>
+        <item>#5478B6</item>
+        <item>#E86754</item>
+        <item>#72E887</item>
     </string-array>
 
 </resources>

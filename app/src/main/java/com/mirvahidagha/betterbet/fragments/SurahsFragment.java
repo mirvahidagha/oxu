@@ -1,7 +1,9 @@
 package com.mirvahidagha.betterbet.fragments;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.core.view.MenuItemCompat;
@@ -30,6 +32,7 @@ import android.widget.Toast;
 import com.mirvahidagha.betterbet.Others.DBHelper;
 import com.mirvahidagha.betterbet.Entities.Surah;
 import com.mirvahidagha.betterbet.Others.MyData;
+import com.mirvahidagha.betterbet.Others.RecyclerAyah;
 import com.mirvahidagha.betterbet.R;
 import com.mirvahidagha.betterbet.ViewModels.SurahViewModel;
 import com.mirvahidagha.betterbet.dialog.BetterDialog;
@@ -49,9 +52,19 @@ public class SurahsFragment extends Fragment {
     RecycleAdapter adapter;
     boolean visible;
     MenuItem menuItem;
+    private Typeface bold, regular, light;
 
     public SurahsFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        bold = Typeface.createFromAsset(getResources().getAssets(), "bold.ttf");
+        regular = Typeface.createFromAsset(getResources().getAssets(), "regular.ttf");
+        light = Typeface.createFromAsset(getResources().getAssets(), "light.ttf");
+
     }
 
     @Override
@@ -132,16 +145,24 @@ public class SurahsFragment extends Fragment {
             //  holder.positionRecyclerItem = holder.getAdapterPosition();
             final Surah surah = filteredSurahs.get(position);
 
+
+            holder.arab.setTypeface(bold);
+            holder.azeri.setTypeface(bold);
+            holder.meaning.setTypeface(regular);
+            holder.count.setTypeface(regular);
+            holder.number.setTypeface(bold);
+
             holder.arab.setText(surah.getArab());
             holder.azeri.setText(surah.getAzeri());
             holder.meaning.setText(surah.getMeaning());
 
 //            String order = String.valueOf("");
 //          holder.order.setText("Sırası: " + order);
-
-            holder.place.setText(surah.getPlace());
             String count = String.valueOf(surah.getCount());
-            holder.count.setText(count);
+            String place = String.valueOf(surah.getPlace());
+            String placeCount = String.format("%sdə nazil olub, %s ayədir.",place, count );
+
+            holder.count.setText(placeCount);
             holder.number.setText(String.valueOf(position + 1));
 
             Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_scale_animation);
@@ -217,7 +238,7 @@ public class SurahsFragment extends Fragment {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
 
-            TextView arab, number, place, count, azeri, meaning, order;
+            TextView arab, number, count, azeri, meaning, order;
             View view;
             CardView cardView;
 
@@ -227,9 +248,9 @@ public class SurahsFragment extends Fragment {
                 cardView = itemView.findViewById(R.id.card);
                 arab = itemView.findViewById(R.id.sura_ar);
                 azeri = itemView.findViewById(R.id.sura_az);
-                count = itemView.findViewById(R.id.sura_count);
+                count = itemView.findViewById(R.id.count_place);
                 meaning = itemView.findViewById(R.id.sura_meaning);
-                place = itemView.findViewById(R.id.sura_place);
+
                 //   order = itemView.findViewById(R.id.sura_order);
                 number = itemView.findViewById(R.id.number);
                 view = itemView;
@@ -243,37 +264,37 @@ public class SurahsFragment extends Fragment {
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-            menuItem = menu.findItem(R.id.menu_action_surahs);
+        menuItem = menu.findItem(R.id.menu_action_surahs);
 
-            searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
 
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    return false;
-                }
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    adapter.getFilter().filter(newText);
-                    return false;
-                }
-            });
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
-            searchView.setOnSearchClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    EventBus.getDefault().post(true);
-                }
-            });
-            searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-                @Override
-                public boolean onClose() {
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().post(true);
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
 
-                    EventBus.getDefault().post(false);
-                    return false;
-                }
-            });
+                EventBus.getDefault().post(false);
+                return false;
+            }
+        });
 
     }
 

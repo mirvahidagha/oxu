@@ -1,28 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card"
-    android:layout_marginTop="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="8dp"
-    android:background="@drawable/custom_dialog_style"
-    android:layout_marginRight="8dp">
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="8dp"
+    android:background="@drawable/translation_selector"
+    android:longClickable="true">
+
 
     <TextView
+        android:id="@+id/translation_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:lineSpacingMultiplier="1.3"
+        android:padding="8dp"
+        android:text="Edip Yüksel"
+        android:textColor="@android:color/white"
+        android:textSize="13sp"
+        android:textStyle="normal"
+        app:layout_constraintRight_toRightOf="@id/card"
+        app:layout_constraintTop_toBottomOf="@id/other_ayah"
+
+        />
+
+    <TextView
+
         android:id="@+id/other_ayah"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingRight="16dp"
         android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="8dp"
         android:text="15"
         android:textColor="@color/message_color_dark"
         android:textSize="15sp"
-        android:textStyle="normal" />
+        android:textStyle="normal"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

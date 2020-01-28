@@ -5,13 +5,16 @@ import android.content.Context;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
 import com.mirvahidagha.betterbet.Entities.Surah;
 import com.mirvahidagha.betterbet.Others.MyData;
+import com.mirvahidagha.betterbet.Others.RecyclerAyah;
 import com.mirvahidagha.betterbet.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -34,14 +37,16 @@ public class BetterDialog extends SweetAlertDialog {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        copy.setVisibility(View.GONE);
+        star.setVisibility(View.GONE);
     }
 
     @Override
     public SweetAlertDialog setCustomView(View view) {
 
-        RecyclerView recycler = view.findViewById(R.id.recycler_dialog);
+        RecyclerAyah recycler = view.findViewById(R.id.recycler_dialog);
         RecycleAdapter adapter = new RecycleAdapter(surah.getCount());
         recycler.setHasFixedSize(true);
         GridLayoutManager grid = new GridLayoutManager(view.getContext(), 5);
@@ -66,6 +71,8 @@ public class BetterDialog extends SweetAlertDialog {
         @Override
         public void onBindViewHolder(final RecycleAdapter.ViewHolder holder, final int position) {
 
+
+            holder.number.setTypeface(bold);
             holder.number.setText(String.valueOf(position + 1));
 
             holder.number.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +94,7 @@ public class BetterDialog extends SweetAlertDialog {
 
         class ViewHolder extends RecyclerView.ViewHolder {
 
-            TextView number;
+            MaterialButton number;
 
             ViewHolder(final View itemView) {
                 super(itemView);

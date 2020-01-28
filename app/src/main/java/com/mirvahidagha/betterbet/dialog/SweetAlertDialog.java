@@ -2,7 +2,10 @@ package com.mirvahidagha.betterbet.dialog;
 
 
 import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,6 +16,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
 import com.mirvahidagha.betterbet.R;
 
 
@@ -22,11 +26,11 @@ public class SweetAlertDialog extends Dialog {
     private AnimationSet mModalOutAnim;
     private Animation mOverlayOutAnim;
     private TextView mTitleTextView;
-    private TextView mContentTextView;
     private FrameLayout mCustomViewContainer;
     private View mCustomView;
     private String mTitleText;
-    private String mContentText;
+    public MaterialButton copy, star;
+    Typeface bold, regular, light;
 
     private boolean mCloseFromCancel;
 
@@ -38,7 +42,9 @@ public class SweetAlertDialog extends Dialog {
 
         mModalInAnim = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(), R.anim.modal_in);
         mModalOutAnim = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(), R.anim.modal_out);
-
+        bold = Typeface.createFromAsset(context.getAssets(), "bold.ttf");
+        regular = Typeface.createFromAsset(context.getAssets(), "regular.ttf");
+        light = Typeface.createFromAsset(context.getAssets(), "light.ttf");
 
         mModalOutAnim.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -86,14 +92,22 @@ public class SweetAlertDialog extends Dialog {
 
         mDialogView = getWindow().getDecorView().findViewById(android.R.id.content);
         mTitleTextView = (TextView) findViewById(R.id.title_text);
-        mContentTextView = (TextView) findViewById(R.id.content_text);
         mCustomViewContainer = (FrameLayout) findViewById(R.id.custom_view_container);
 
+        copy = findViewById(R.id.copy);
+        star = findViewById(R.id.star);
+
+        copy.setTypeface(bold);
+        star.setTypeface(bold);
+
         setTitleText(mTitleText);
-        setContentText(mContentText);
         setCustomView(mCustomView);
     }
 
+    void setOnClick(View.OnClickListener click) {
+        copy.setOnClickListener(click);
+        star.setOnClickListener(click);
+    }
 
     public SweetAlertDialog setTitleText(String text) {
         mTitleText = text;
@@ -102,31 +116,13 @@ public class SweetAlertDialog extends Dialog {
                 mTitleTextView.setVisibility(View.GONE);
             } else {
                 mTitleTextView.setVisibility(View.VISIBLE);
+                mTitleTextView.setTypeface(bold);
                 mTitleTextView.setText(mTitleText);
             }
         }
         return this;
     }
 
-    public SweetAlertDialog setContentText(String text) {
-        mContentText = text;
-        if (mContentTextView != null && mContentText != null) {
-            showContentText(true);
-            mContentTextView.setText(mContentText);
-            mContentTextView.setVisibility(View.VISIBLE);
-            mCustomViewContainer.setVisibility(View.GONE);
-        }
-        return this;
-    }
-
-
-    public SweetAlertDialog showContentText(boolean isShow) {
-        boolean mShowContent = isShow;
-        if (mContentTextView != null) {
-            mContentTextView.setVisibility(mShowContent ? View.VISIBLE : View.GONE);
-        }
-        return this;
-    }
 
     @Override
     public void setTitle(CharSequence title) {
@@ -149,14 +145,13 @@ public class SweetAlertDialog extends Dialog {
         if (mCustomView != null && mCustomViewContainer != null) {
             mCustomViewContainer.addView(view);
             mCustomViewContainer.setVisibility(View.VISIBLE);
-            mContentTextView.setVisibility(View.GONE);
         }
         return this;
     }
 
     @Override
     public void cancel() {
-       dismissWithAnimation(true);
+        dismissWithAnimation(true);
 
     }
 
