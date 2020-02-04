@@ -22,6 +22,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -33,10 +35,17 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.mirvahidagha.betterbet.Entities.Surah;
+import com.mirvahidagha.betterbet.Others.FragmentAdapter;
+import com.mirvahidagha.betterbet.Others.MyData;
 import com.mirvahidagha.betterbet.R;
+import com.mirvahidagha.betterbet.ViewModels.SurahViewModel;
+import com.mirvahidagha.betterbet.fragments.AyahsFragment;
 import com.mirvahidagha.betterbet.fragments.ListenFragment;
-import com.mirvahidagha.betterbet.fragments.LiveFragment;
+import com.mirvahidagha.betterbet.fragments.SubjectsFragment;
 import com.mirvahidagha.betterbet.fragments.SearchFragment;
 import com.mirvahidagha.betterbet.fragments.SurahsFragment;
 import com.mirvahidagha.betterbet.fragments.StarFragment;
@@ -46,6 +55,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Main extends AppCompatActivity {
 
@@ -61,7 +71,9 @@ public class Main extends AppCompatActivity {
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     boolean[] checkedItems;
-    public static String TABLE_NAME="ziya";
+    final ArrayList<Fragment> fragments = new ArrayList<>();
+    FragmentAdapter adapter;
+    FragmentManager fm;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -76,6 +88,7 @@ public class Main extends AppCompatActivity {
         translations = getResources().getStringArray(R.array.translations);
         checkedItems = getCheckedItems();
 
+        fm = getSupportFragmentManager();
 
         colors = getResources().getStringArray(R.array.rengler);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.main);
@@ -92,18 +105,28 @@ public class Main extends AppCompatActivity {
         toolbar.setBackgroundColor(Color.parseColor(colors[2]));
         title.setText(tabNames[2]);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDefaultDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         initUI();
 
     }
 
-    private void initUI() {
+    private void setFragments() {
+        fragments.add(new SubjectsFragment());
+        fragments.add(new SearchFragment());
+        fragments.add(new SurahsFragment());
+        fragments.add(new StarFragment());
+        fragments.add(new ListenFragment());
+    }
 
-        FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager());
+    private void initUI() {
+        setFragments();
+        adapter = new FragmentAdapter(fm);
         viewPager = findViewById(R.id.vp_horizontal_ntb);
         viewPager.setAdapter(adapter);
+        adapter.setFragments(fragments);
         viewPager.setOffscreenPageLimit(5);
+
 
         final NavigationTabBar navigationTabBar = findViewById(R.id.ntb_horizontal);
         navigation = navigationTabBar;
@@ -189,22 +212,20 @@ public class Main extends AppCompatActivity {
             }
         });
 
-        navigationTabBar.postDelayed(new
-
-                                             Runnable() {
-                                                 @Override
-                                                 public void run() {
-                                                     for (int i = 0; i < navigationTabBar.getModels().size(); i++) {
-                                                         final NavigationTabBar.Model model = navigationTabBar.getModels().get(i);
-                                                         navigationTabBar.postDelayed(new Runnable() {
-                                                             @Override
-                                                             public void run() {
-                                                                 model.showBadge();
-                                                             }
-                                                         }, i * 100);
-                                                     }
-                                                 }
-                                             }, 500);
+        navigationTabBar.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < navigationTabBar.getModels().size(); i++) {
+                    final NavigationTabBar.Model model = navigationTabBar.getModels().get(i);
+                    navigationTabBar.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            model.showBadge();
+                        }
+                    }, i * 100);
+                }
+            }
+        }, 500);
 
 
     }
@@ -350,10 +371,7 @@ public class Main extends AppCompatActivity {
 
     @Subscribe
     public void customEventReceived(String event) {
-        if (!event.equals("empty"))
-            tabNames[2] = event;
-        else tabNames = getResources().getStringArray(R.array.tab_names);
-
+        tabNames[2] = getResources().getStringArray(R.array.tab_names)[2];
         title.setText(tabNames[currentPosition]);
     }
 
@@ -366,70 +384,42 @@ public class Main extends AppCompatActivity {
 
     @Subscribe
     public void customEventReceived(Integer event) {
-
         viewPager.setCurrentItem(event, true);
         //  title.setText( tabNames[currentPosition]);
     }
 
-    static class FragmentAdapter extends FragmentPagerAdapter {
+    @Subscribe
+    public void customEventReceived(MyData data) {
+        viewPager.setCurrentItem(2, true);
+        assert getFragmentManager() != null;
 
-        FragmentManager fm;
+        setTitle(data.getSurahId());
 
-        FragmentAdapter(FragmentManager fm) {
-            super(fm);
-            this.fm = fm;
+        AyahsFragment fragment = (AyahsFragment) fm.findFragmentByTag("ayah");
+        if (fragment == null) {
+            fragment = (new AyahsFragment());
         }
+        adapter.updateFragment("ayah", fragment.getInstance(data.getSurahId(), data.getScrollPosition()));
+        fragment.update();
+    }
 
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            FragmentTransaction ft = fm.beginTransaction();
-            String[] tags = {"tag1", "tag2", "tag3", "tag4", "tag5"};
+    @Override
+    public void onBackPressed() {
 
-            Fragment fragment = fm.findFragmentByTag(tags[position]);
-            if (fragment == null) {
-                fragment = getItem(position);
-                ft.add(container.getId(), fragment, tags[position]);
-            } else {
-                ft.attach(fragment);
-            }
-
-            ft.commit();
-
-            return fragment;
-
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-
-            Fragment fragment = null;
-            switch (position) {
-
-                case 0:
-                    fragment = new LiveFragment();
-                    break;
-                case 1:
-                    fragment = new SearchFragment();
-                    break;
-                case 2:
-                    fragment = new SurahsFragment();
-                    break;
-                case 3:
-                    fragment = new StarFragment();
-                    break;
-                case 4:
-                    fragment = new ListenFragment();
-                    break;
-            }
-
-            return fragment;
-        }
-
-        @Override
-        public int getCount() {
-            return 5;
-        }
+        adapter.updateFragment("sura", fm.findFragmentByTag("sura"));
 
     }
+
+    public void setTitle(int i) {
+        SurahViewModel viewModel = ViewModelProviders.of(this).get(SurahViewModel.class);
+        viewModel.getSurah(i).observe(this, new Observer<Surah>() {
+            @Override
+            public void onChanged(Surah surah) {
+                tabNames[2] = surah.getAzeri();
+                title.setText(surah.getAzeri());
+            }
+        });
+    }
+
 
 }

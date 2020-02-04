@@ -108,7 +108,7 @@ public class SearchFragment extends Fragment {
 
         prefListener = (prf, key) ->
         {
-            if (key == "main") updateAyahContent(prf.getInt("main", 2));
+            if (key.equals("main")) updateAyahContent(prf.getInt("main", 2));
         };
 
         pref.registerOnSharedPreferenceChangeListener(prefListener);

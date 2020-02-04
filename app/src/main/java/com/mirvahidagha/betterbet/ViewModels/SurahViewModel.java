@@ -26,4 +26,8 @@ public class SurahViewModel extends AndroidViewModel {
     public LiveData<List<Surah>> getSurahs() {
         return surahs;
     }
+
+    public LiveData<Surah> getSurah(int i) {
+        return repository.getSurah(i);
+    }
 }

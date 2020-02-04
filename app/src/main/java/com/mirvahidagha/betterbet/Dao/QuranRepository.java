@@ -40,6 +40,9 @@ public class QuranRepository {
         new UpdateAsyncTask(quranDao).execute(query);
     }
 
+
+
+
     public LiveData<List<Ayah>> getAllAyahs(int surahNumber) {
         String queryString = "select * from " + table() + " where SuraID=" + surahNumber;
         SimpleSQLiteQuery query = new SimpleSQLiteQuery(queryString);
@@ -60,6 +63,12 @@ public class QuranRepository {
     public LiveData<List<Surah>> getSurahs() {
 
         return allSurah;
+    }
+
+
+
+    public LiveData<Surah> getSurah(int i) {
+        return quranDao.getSurah(i);
     }
 
     public LiveData<Ayah> getAyahContent(String tableName, int surahNumber, int ayahNumber) {

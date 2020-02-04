@@ -20,6 +20,10 @@ public interface QuranDao {
     @Query("SELECT * FROM surahs")
     public LiveData<List<Surah>> getSurahs();
 
+    @Query("SELECT * FROM surahs where sura_id=:number")
+    public LiveData<Surah> getSurah(int number);
+
+
     @RawQuery(observedEntities = Ayah.class)
     LiveData<Ayah> getAyah(SupportSQLiteQuery query);
 

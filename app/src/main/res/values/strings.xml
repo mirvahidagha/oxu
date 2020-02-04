@@ -22,7 +22,7 @@
         <item>Yaşar Nuri Öztürk</item>
         <item>Edip Yüksel</item>
         <item>Əlixan Musayev</item>
-        <item>Adem Uğur</item>
+        <item>Ağabala Mehdiyev - Dürdanə Cəfərli</item>
         <item>Ali Bulaç-1</item>
         <item>Ali Bulaç-2</item>
         <item>Ali Fikri Yavuz</item>
@@ -44,6 +44,7 @@
         <item>Suat Yıldırım</item>
         <item>Süleyman Ateş</item>
         <item>Tefhim-ul Kuran</item>
+        <item>Adem Uğur</item>
     </string-array>
 
     <string-array name="table_names">
@@ -52,7 +53,7 @@
         <item>yasar_nuri_ozturk</item>
         <item>edip_yuksel</item>
         <item>elixan_musayev</item>
-        <item>adem_ugur</item>
+        <item>durdane</item>
         <item>ali_bulac_1</item>
         <item>ali_bulac_2</item>
         <item>ali_fikri_yavuz</item>
@@ -74,6 +75,7 @@
         <item>suat_yildirim</item>
         <item>suleyman_ates</item>
         <item>tefhim_ul_kuran</item>
+        <item>adem_ugur</item>
     </string-array>
 
 

@@ -54,7 +54,7 @@ public class SurahsFragment extends Fragment {
     SurahViewModel viewModel;
     SearchView searchView;
     RecycleAdapter adapter;
-    short cycle = 1;
+    short cycle = 2;
     MenuItem menuItem;
     private Typeface bold, regular, light;
     ArrayList<Surah> surahs = new ArrayList<>();
@@ -90,8 +90,9 @@ public class SurahsFragment extends Fragment {
         viewModel.getSurahs().observe(this, new Observer<List<Surah>>() {
             @Override
             public void onChanged(List<Surah> surahList) {
+                surahs.clear();
                 surahs.addAll(surahList);
-                adapter.setSurahs(surahList);
+                adapter.setSurahs(surahs);
             }
         });
 
@@ -112,19 +113,6 @@ public class SurahsFragment extends Fragment {
     }
 
     @Subscribe
-    public void customEventReceived(MyData data) {
-        EventBus.getDefault().post(2);
-        assert getFragmentManager() != null;
-        FragmentTransaction trans = getFragmentManager().beginTransaction();
-        AyahsFragment fragment = (new AyahsFragment()).getInstance(data.getSurahId(), data.getScrollPosition());
-        trans.replace(R.id.quran_layout, fragment);
-        trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        trans.addToBackStack(null);
-        recyclerView.setVisibility(View.INVISIBLE);
-        trans.commit();
-    }
-
-    @Subscribe
     public void customEventReceived(String event) {
         recyclerView.setVisibility(event.equals("empty") ? View.VISIBLE : View.INVISIBLE);
     }
@@ -141,7 +129,7 @@ public class SurahsFragment extends Fragment {
             return new RecycleAdapter.ViewHolder(view);
         }
 
-        public void setSurahs(List<Surah> surahs) {
+         void setSurahs(List<Surah> surahs) {
             this.surahs = surahs;
             this.filteredSurahs = surahs;
             notifyDataSetChanged();
@@ -160,7 +148,7 @@ public class SurahsFragment extends Fragment {
             holder.number.setTypeface(bold);
 
             holder.arab.setText(surah.getArab());
-            holder.azeri.setText(surah.getAzeri());
+            holder.azeri.setText(surah.getId()+". "+surah.getAzeri());
             holder.meaning.setText(surah.getMeaning());
 
 //            String order = String.valueOf("");

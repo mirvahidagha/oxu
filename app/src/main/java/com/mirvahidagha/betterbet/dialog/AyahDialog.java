@@ -93,6 +93,7 @@ public class AyahDialog extends SweetAlertDialog implements View.OnClickListener
         super.onStop();
     }
 
+
     @Override
     public SweetAlertDialog setCustomView(View view) {
 
@@ -125,9 +126,8 @@ public class AyahDialog extends SweetAlertDialog implements View.OnClickListener
         }
     }
 
-
     private void starAyah(int number) {
-        if (ayah.getStar() == 0)
+         if (ayah.getStar() == 0)
             ayah.setStar(1);
         else ayah.setStar(0);
         viewModel.update(ayah);
@@ -152,21 +152,14 @@ public class AyahDialog extends SweetAlertDialog implements View.OnClickListener
         }
 
 
-        String header(int i) {
-
-            return null;
-        }
-
-
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
             holder.ayah.setText(arrayList.get(position).getAyahText());
             holder.ayah.setTypeface(bold);
-            if (position == 0) {
+            if (otherAyahs.get(position).getTableId()==0) {
                 holder.ayah.setTextSize(TypedValue.COMPLEX_UNIT_SP, 26);
                 holder.ayah.setTypeface(regular);
-
             }
 
             holder.header.setText(translations.get(position));

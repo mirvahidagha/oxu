@@ -56,16 +56,18 @@ public class AyahsFragment extends Fragment {
     SharedPreferences.OnSharedPreferenceChangeListener prefListener;
     FastScroller fastScroller;
     Typeface bold, regular, light;
+    Observer observer;
 
     public AyahsFragment() {
         // Required empty public constructor
     }
 
     public AyahsFragment getInstance(int surahId, int scrollPosition) {
-        instance = new AyahsFragment();
-        instance.surahNumber = surahId;
-        instance.scrollItem = scrollPosition;
-        return instance;
+        //  instance = new AyahsFragment();
+        this.surahNumber = surahId;
+        this.scrollItem = scrollPosition;
+        scrolled = false;
+        return this;
     }
 
     @Override
@@ -129,7 +131,7 @@ public class AyahsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // setHasOptionsMenu(true);
+        setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.ayahs_fragment, container, false);
 
         recycler = view.findViewById(R.id.recycler_ayahs);
@@ -144,11 +146,10 @@ public class AyahsFragment extends Fragment {
             @Override
             public void onChanged(List<Surah> surah) {
                 currentSurah = surah.get(surahNumber - 1);
-                EventBus.getDefault().post(currentSurah.getAzeri());
             }
         });
 
-        Observer observer = new Observer<List<Ayah>>() {
+        observer = new Observer<List<Ayah>>() {
             @Override
             public void onChanged(List<Ayah> ayahs) {
                 adapter.setAyahs(ayahs);
@@ -157,6 +158,7 @@ public class AyahsFragment extends Fragment {
                 scrolled = true;
             }
         };
+
         viewModel.getAyahs(surahNumber).observe(this, observer);
 
         prefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
@@ -170,33 +172,8 @@ public class AyahsFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        pref.unregisterOnSharedPreferenceChangeListener(prefListener);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        EventBus.getDefault().post(new Just());
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
-    }
-
-    @Subscribe
-    public void customEventReceived(Just just) {
-        EventBus.getDefault().post(currentSurah.getAzeri());
+    public void update() {
+        viewModel.getAyahs(surahNumber).observe(this, observer);
     }
 
     @Override
@@ -228,9 +205,8 @@ public class AyahsFragment extends Fragment {
 
             if (pref.getInt("main", 1) == 0) {
                 holder.ayah.setTextSize(TypedValue.COMPLEX_UNIT_SP, 26);
-                holder.ayah.setTypeface(regular); }
-
-            else {
+                holder.ayah.setTypeface(regular);
+            } else {
 
                 holder.ayah.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                 holder.ayah.setTypeface(bold);
