@@ -4,9 +4,11 @@ package com.mirvahidagha.betterbet.tabs.behavior;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Parcelable;
+
 import androidx.annotation.IntDef;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.WindowInsetsCompat;
+
 import android.view.View;
 
 import java.lang.annotation.Retention;

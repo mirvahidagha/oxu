@@ -64,6 +64,7 @@
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:text="Kopyala"
+                android:theme="@style/FormButton"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                 android:textSize="14sp"
                 app:cornerRadius="8dp"
@@ -77,8 +78,10 @@
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:text="Ulduzla"
+                android:theme="@style/FormButton"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                 android:textSize="14sp"
+
                 app:cornerRadius="8dp"
                 app:icon="@drawable/ic_star_2" />
 

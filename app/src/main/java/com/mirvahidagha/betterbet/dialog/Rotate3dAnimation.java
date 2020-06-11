@@ -63,7 +63,7 @@ public class Rotate3dAnimation extends Animation {
         return d;
     }
 
-    public Rotate3dAnimation (Context context, AttributeSet attrs) {
+    public Rotate3dAnimation(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Rotate3dAnimation);
@@ -84,7 +84,7 @@ public class Rotate3dAnimation extends Animation {
         initializePivotPoint();
     }
 
-    public Rotate3dAnimation (int rollType, float fromDegrees, float toDegrees) {
+    public Rotate3dAnimation(int rollType, float fromDegrees, float toDegrees) {
         mRollType = rollType;
         mFromDegrees = fromDegrees;
         mToDegrees = toDegrees;
@@ -92,7 +92,7 @@ public class Rotate3dAnimation extends Animation {
         mPivotY = 0.0f;
     }
 
-    public Rotate3dAnimation (int rollType, float fromDegrees, float toDegrees, float pivotX, float pivotY) {
+    public Rotate3dAnimation(int rollType, float fromDegrees, float toDegrees, float pivotX, float pivotY) {
         mRollType = rollType;
         mFromDegrees = fromDegrees;
         mToDegrees = toDegrees;
@@ -104,7 +104,7 @@ public class Rotate3dAnimation extends Animation {
         initializePivotPoint();
     }
 
-    public Rotate3dAnimation (int rollType, float fromDegrees, float toDegrees, int pivotXType, float pivotXValue, int pivotYType, float pivotYValue) {
+    public Rotate3dAnimation(int rollType, float fromDegrees, float toDegrees, int pivotXType, float pivotXValue, int pivotYType, float pivotYValue) {
         mRollType = rollType;
         mFromDegrees = fromDegrees;
         mToDegrees = toDegrees;

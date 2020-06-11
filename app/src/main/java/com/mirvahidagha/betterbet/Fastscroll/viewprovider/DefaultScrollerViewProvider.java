@@ -46,7 +46,7 @@ public class DefaultScrollerViewProvider extends ScrollerViewProvider {
 
     @Override
     public int getBubbleOffset() {
-        return (int) (getScroller().isVertical() ? ((float)handle.getHeight()/2f)-bubble.getHeight() : ((float)handle.getWidth()/2f)-bubble.getWidth());
+        return (int) (getScroller().isVertical() ? ((float) handle.getHeight() / 2f) - bubble.getHeight() : ((float) handle.getWidth() / 2f) - bubble.getWidth());
     }
 
     @Override

@@ -27,13 +27,8 @@ public class AyahViewModel extends AndroidViewModel {
         repository.update(ayah);
     }
 
-    public LiveData<List<Ayah>> getStarredAyahs() {
-        LiveData<List<Ayah>> ayahs = repository.getStarredAyahs();
-        return ayahs;
-    }
-
-    public LiveData<List<Ayah>> getAyahs(int surahId) {
-        LiveData<List<Ayah>> ayahs = repository.getAllAyahs(surahId);
+    public LiveData<List<Ayah>> getAyahs(int surahId, String table) {
+        LiveData<List<Ayah>> ayahs = repository.getAllAyahs(surahId, table);
         return ayahs;
     }
 

@@ -1,14 +1,11 @@
 package com.mirvahidagha.betterbet.fragments;
 
-import android.graphics.Typeface;
-import android.os.Bundle;
 
-import androidx.annotation.Nullable;
+import android.os.Bundle;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -29,13 +26,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mirvahidagha.betterbet.Activities.Main;
 import com.mirvahidagha.betterbet.Others.AlphabetSurahOrder;
 import com.mirvahidagha.betterbet.Others.DBHelper;
 import com.mirvahidagha.betterbet.Entities.Surah;
 import com.mirvahidagha.betterbet.Others.MyData;
 import com.mirvahidagha.betterbet.Others.OriginalSurahOrder;
-import com.mirvahidagha.betterbet.Others.RecyclerAyah;
 import com.mirvahidagha.betterbet.Others.SurahNazilOrder;
+import com.mirvahidagha.betterbet.Others.TabFragment;
 import com.mirvahidagha.betterbet.R;
 import com.mirvahidagha.betterbet.ViewModels.SurahViewModel;
 import com.mirvahidagha.betterbet.dialog.BetterDialog;
@@ -47,16 +45,16 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
-public class SurahsFragment extends Fragment {
+public class SurahsFragment extends TabFragment {
     public RecyclerView recyclerView;
 
     SurahViewModel viewModel;
-    SearchView searchView;
+ //   SearchView searchView;
     RecycleAdapter adapter;
     short cycle = 2;
-    MenuItem menuItem;
-    private Typeface bold, regular, light;
+  //  MenuItem menuItem;
     ArrayList<Surah> surahs = new ArrayList<>();
 
     public SurahsFragment() {
@@ -64,18 +62,10 @@ public class SurahsFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        bold = Typeface.createFromAsset(getResources().getAssets(), "bold.ttf");
-        regular = Typeface.createFromAsset(getResources().getAssets(), "regular.ttf");
-        light = Typeface.createFromAsset(getResources().getAssets(), "light.ttf");
-
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
+        super.onCreateView(inflater, container, savedInstanceState);
+      //  setHasOptionsMenu(true);
         final View view = inflater.inflate(R.layout.quran, container, false);
         DBHelper.copyDatabase(view.getContext(), "quran.db");
 
@@ -87,7 +77,7 @@ public class SurahsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         viewModel = ViewModelProviders.of(this).get(SurahViewModel.class);
-        viewModel.getSurahs().observe(this, new Observer<List<Surah>>() {
+        viewModel.getSurahs().observe(getViewLifecycleOwner(), new Observer<List<Surah>>() {
             @Override
             public void onChanged(List<Surah> surahList) {
                 surahs.clear();
@@ -125,11 +115,11 @@ public class SurahsFragment extends Fragment {
         @NotNull
         @Override
         public RecycleAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
-            final View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_list, parent, false);
+            final View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_surah, parent, false);
             return new RecycleAdapter.ViewHolder(view);
         }
 
-         void setSurahs(List<Surah> surahs) {
+        void setSurahs(List<Surah> surahs) {
             this.surahs = surahs;
             this.filteredSurahs = surahs;
             notifyDataSetChanged();
@@ -141,14 +131,14 @@ public class SurahsFragment extends Fragment {
             final Surah surah = filteredSurahs.get(position);
 
 
-            holder.arab.setTypeface(bold);
-            holder.azeri.setTypeface(bold);
-            holder.meaning.setTypeface(regular);
-            holder.count.setTypeface(regular);
-            holder.number.setTypeface(bold);
+            holder.arab.setTypeface(Main.bold);
+            holder.azeri.setTypeface(Main.bold);
+            holder.meaning.setTypeface(Main.regular);
+            holder.count.setTypeface(Main.regular);
+            holder.number.setTypeface(Main.bold);
 
             holder.arab.setText(surah.getArab());
-            holder.azeri.setText(surah.getId()+". "+surah.getAzeri());
+            holder.azeri.setText(surah.getId() + ". " + surah.getAzeri());
             holder.meaning.setText(surah.getMeaning());
 
 //            String order = String.valueOf("");
@@ -255,48 +245,48 @@ public class SurahsFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-
-        menuItem = menu.findItem(R.id.menu_action_surahs);
-
-        searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-
-        searchView.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EventBus.getDefault().post(true);
-            }
-        });
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-
-                EventBus.getDefault().post(false);
-                return false;
-            }
-        });
-
-    }
+//    @Override
+//    public void onPrepareOptionsMenu(Menu menu) {
+//        super.onPrepareOptionsMenu(menu);
+//
+//        menuItem = menu.findItem(R.id.menu_action_surahs);
+//
+//        searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                adapter.getFilter().filter(newText);
+//                return false;
+//            }
+//        });
+//
+//        searchView.setOnSearchClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                EventBus.getDefault().post(true);
+//            }
+//        });
+//        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+//            @Override
+//            public boolean onClose() {
+//
+//                EventBus.getDefault().post(false);
+//                return false;
+//            }
+//        });
+//
+//    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater = getActivity().getMenuInflater();
+        inflater = Objects.requireNonNull(getActivity()).getMenuInflater();
         inflater.inflate(R.menu.menu_surahs, menu);
     }
 
@@ -333,5 +323,11 @@ public class SurahsFragment extends Fragment {
 
     int cycle() {
         return ++cycle % 3;
+    }
+
+
+    @Override
+    public void search(String text) {
+        adapter.getFilter().filter(text);
     }
 }

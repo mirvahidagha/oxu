@@ -35,5 +35,20 @@
     <color name="beyaz">#ffffff</color>
     <color name="dialog_color">#5478B6</color>
 
+    <color name="seekbar_bg">#141414</color>
+    <color name="seekbar_progress">#a53130</color>
+    <color name="seekbar_sec_progress">#875e5e</color>
+
+
+    <color name="yashil">#72E887</color>
+    <color name="sari">#FFE36D</color>
+    <color name="benovseyi">#8660D7</color>
+    <color name="goy">#5478B6</color>
+    <color name="goy_shade">#48669C</color>
+    <color name="qirmizi">#E86754</color>
+    <color name="action">#46444F</color>
+
+
+    <color name="numberColor">#3C5682</color>
 
 </resources>

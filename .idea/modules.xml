@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Oxu.iml" filepath="$PROJECT_DIR$/.idea/modules/Oxu.iml" group="Oxu" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="Oxu/app" />
+      <module fileurl="file://$PROJECT_DIR$/Oxu.iml" filepath="$PROJECT_DIR$/Oxu.iml" group="Oxu" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Oxu/app" />
     </modules>
   </component>
 </project>

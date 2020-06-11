@@ -8,4 +8,8 @@
     <dimen name="fastscroll__handle_inset">9dp</dimen>
     <dimen name="fastscroll__handle_clickable_width">26dp</dimen>
 
+    <dimen name="list_item_height">48dp</dimen>
+    <dimen name="horizontal_margin">16dp</dimen>
+    <dimen name="list_item_left_margin">16dp</dimen>
+
 </resources>

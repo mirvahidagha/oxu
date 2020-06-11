@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.MenuItemCompat;
@@ -15,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.LifecycleOwner;
@@ -26,6 +28,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.mirvahidagha.betterbet.Entities.Ayah;
 import com.mirvahidagha.betterbet.Entities.Surah;
 import com.mirvahidagha.betterbet.Others.CombinedLiveData;
+import com.mirvahidagha.betterbet.Others.TabFragment;
 import com.mirvahidagha.betterbet.R;
 import com.mirvahidagha.betterbet.Search.SearchAdapter;
 import com.mirvahidagha.betterbet.Search.NewsItem;
@@ -36,20 +39,19 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends TabFragment {
 
     private AyahViewModel ayahViewModel;
-    // private List<Surah> surahs;
-    // private List<Ayah> ayahs;
     private RecyclerView recycler;
     private SearchAdapter adapter;
     private ArrayList<NewsItem> items;
     private ConstraintLayout rootLayout;
-    private SearchView searchView;
+  //  private SearchView searchView;
     private String[] tables;
     private SharedPreferences pref;
-    MenuItem menuItem;
+   // MenuItem menuItem;
     SurahViewModel surahViewModel;
 
     SharedPreferences.OnSharedPreferenceChangeListener prefListener;
@@ -61,10 +63,8 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pref = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
+        pref = Objects.requireNonNull(getContext()).getSharedPreferences("settings", Context.MODE_PRIVATE);
         tables = getResources().getStringArray(R.array.table_names);
-
-        //String table = tables[pref.getInt("main", 1)];
 
         ayahViewModel = ViewModelProviders.of(this).get(AyahViewModel.class);
         surahViewModel = ViewModelProviders.of(this).get(SurahViewModel.class);
@@ -73,7 +73,8 @@ public class SearchFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saved) {
-        setHasOptionsMenu(true);
+        super.onCreateView(inflater, container, saved);
+       // setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_forecasts, container, false);
         //  getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
@@ -91,7 +92,7 @@ public class SearchFragment extends Fragment {
         surahsAndAyahs.observe((LifecycleOwner) getContext(), pair -> {
 
             if (pair.second != null && pair.first != null) {
-                ayahViewModel.getAllAyahs().observe(this, ayahContents -> {
+                ayahViewModel.getAllAyahs().observe(getViewLifecycleOwner(), ayahContents -> {
                     items = new ArrayList<>();
                     for (int i = 0; i < ayahContents.size(); i++) {
                         Ayah ayah = pair.second.get(i);
@@ -118,7 +119,7 @@ public class SearchFragment extends Fragment {
 
     private void updateAyahContent(int tableIndex) {
 
-        ayahViewModel.getAllAyahs().observe(this, new Observer<List<Ayah>>() {
+        ayahViewModel.getAllAyahs().observe(getViewLifecycleOwner(), new Observer<List<Ayah>>() {
             @Override
             public void onChanged(List<Ayah> ayahs) {
                 for (int i = 0; i < items.size(); i++)
@@ -140,38 +141,46 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        if (!isFirst) {
-            inflater = getActivity().getMenuInflater();
-            inflater.inflate(R.menu.menu_search, menu);
-
-            menuItem = menu.findItem(R.id.menu_action_search);
-            searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String newText) {
-
-                    adapter.getFilter().filter(newText);
-
-                    return false;
-                }
-            });
-
-            searchView.setOnSearchClickListener(v -> EventBus.getDefault().post(true));
-
-            searchView.setOnCloseListener(() -> {
-                EventBus.getDefault().post(false);
-                return false;
-            });
-
-        }
-        isFirst = false;
+        inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
     }
+//
+//    @Override
+//    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+//        super.onPrepareOptionsMenu(menu);
+//
+//            menuItem = menu.findItem(R.id.menu_action_search);
+//            searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+//
+//            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//                @Override
+//                public boolean onQueryTextSubmit(String query) {
+//
+//                    return false;
+//                }
+//
+//                @Override
+//                public boolean onQueryTextChange(String newText) {
+//
+//                    adapter.getFilter().filter(newText);
+//
+//                    return false;
+//                }
+//            });
+//
+//            searchView.setOnSearchClickListener(v -> EventBus.getDefault().post(true));
+//
+//            searchView.setOnCloseListener(() -> {
+//                EventBus.getDefault().post(false);
+//                return false;
+//            });
+//
+//    }
 
+
+
+    @Override
+    public void search(String text) {
+        adapter.getFilter().filter(text);
+    }
 }

@@ -21,8 +21,6 @@ public class SettingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-
-
     }
 
 }

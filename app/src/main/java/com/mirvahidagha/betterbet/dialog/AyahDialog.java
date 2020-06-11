@@ -127,7 +127,7 @@ public class AyahDialog extends SweetAlertDialog implements View.OnClickListener
     }
 
     private void starAyah(int number) {
-         if (ayah.getStar() == 0)
+        if (ayah.getStar() == 0)
             ayah.setStar(1);
         else ayah.setStar(0);
         viewModel.update(ayah);
@@ -157,7 +157,7 @@ public class AyahDialog extends SweetAlertDialog implements View.OnClickListener
 
             holder.ayah.setText(arrayList.get(position).getAyahText());
             holder.ayah.setTypeface(bold);
-            if (otherAyahs.get(position).getTableId()==0) {
+            if (otherAyahs.get(position).getTableId() == 0) {
                 holder.ayah.setTextSize(TypedValue.COMPLEX_UNIT_SP, 26);
                 holder.ayah.setTypeface(regular);
             }
@@ -176,7 +176,7 @@ public class AyahDialog extends SweetAlertDialog implements View.OnClickListener
 
         }
 
-         void updateItems(ArrayList<Ayah> ayahs) {
+        void updateItems(ArrayList<Ayah> ayahs) {
             arrayList = ayahs;
             Collections.sort(arrayList);
             notifyDataSetChanged();
@@ -187,7 +187,7 @@ public class AyahDialog extends SweetAlertDialog implements View.OnClickListener
             return arrayList.size();
         }
 
-         class ViewHolder extends RecyclerView.ViewHolder {
+        class ViewHolder extends RecyclerView.ViewHolder {
             TextView ayah, header;
             ConstraintLayout item;
 

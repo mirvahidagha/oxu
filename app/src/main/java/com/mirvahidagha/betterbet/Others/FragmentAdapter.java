@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class FragmentAdapter extends FragmentPagerAdapter {
 
     FragmentManager fm;
-    ArrayList<Fragment> fragments = new ArrayList<>();
+    ArrayList<TabFragment> fragments = new ArrayList<>();
     ArrayList<String> fragmentTitles = new ArrayList<>();
     private String[] tags = {"subjects", "search", "sura", "star", "listen"};
 
@@ -72,12 +72,12 @@ public class FragmentAdapter extends FragmentPagerAdapter {
         return tags.length;
     }
 
-    public void setFragments(ArrayList<Fragment> list) {
+    public void setFragments(ArrayList<TabFragment> list) {
         fragments = list;
         notifyDataSetChanged();
     }
 
-    public void updateFragment( String tag, Fragment fragment) {
+    public void updateFragment(String tag, TabFragment fragment) {
         tags[2] = tag;
         fragments.set(2, fragment);
         notifyDataSetChanged();

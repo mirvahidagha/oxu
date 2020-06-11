@@ -11,18 +11,23 @@ import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.mirvahidagha.betterbet.Entities.Ayah;
+import com.mirvahidagha.betterbet.Entities.Index;
+import com.mirvahidagha.betterbet.Entities.StarredAyah;
+import com.mirvahidagha.betterbet.Entities.Subject;
 import com.mirvahidagha.betterbet.Entities.Surah;
 
-@Database(entities = {Surah.class, Ayah.class}, version = 1, exportSchema = false)
+@Database(entities = {Surah.class, Ayah.class, StarredAyah.class, Subject.class, Index.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class QuranDatabase extends RoomDatabase {
 
     private static QuranDatabase instance;
+
     public abstract QuranDao quranDao();
-    public  static synchronized QuranDatabase getInstance(Context context){
+
+    public static synchronized QuranDatabase getInstance(Context context) {
 
         if (instance == null) {
-            instance= Room.databaseBuilder(context.getApplicationContext(),
+            instance = Room.databaseBuilder(context.getApplicationContext(),
                     QuranDatabase.class,
                     "quran.db")
                     .fallbackToDestructiveMigration()
@@ -41,7 +46,7 @@ public abstract class QuranDatabase extends RoomDatabase {
         }
     };
 
-    private static  class CopyDatabase extends AsyncTask<Void, Void, Void>{
+    private static class CopyDatabase extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {

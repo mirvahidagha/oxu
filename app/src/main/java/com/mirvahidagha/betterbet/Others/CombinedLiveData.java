@@ -18,14 +18,14 @@ public class CombinedLiveData extends MediatorLiveData<Pair<List<Surah>, List<Ay
         setValue(Pair.create(surahs, ayahs));
 
         addSource(s, (surahs) -> {
-            if (surahs!=null)
-                this.surahs=surahs;
+            if (surahs != null)
+                this.surahs = surahs;
             setValue(Pair.create(surahs, ayahs));
         });
 
         addSource(a, (ayahs) -> {
-            if (ayahs!=null)
-                this.ayahs=ayahs;
+            if (ayahs != null)
+                this.ayahs = ayahs;
             setValue(Pair.create(surahs, ayahs));
         });
 

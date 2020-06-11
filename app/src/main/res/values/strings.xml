@@ -17,12 +17,12 @@
     <string name="title_activity_settings">Tənzimləmələr</string>
 
     <string-array name="translations">
-        <item>Orijinal</item>
-        <item>Ziya Bünyadov - Vasim Məmmədəliyev</item>
+        <item>Ərəbcə (Orijinal)</item>
+        <item>Ziya Bünyadov\nVasim Məmmədəliyev</item>
         <item>Yaşar Nuri Öztürk</item>
-        <item>Edip Yüksel</item>
+        <item>Nəriman Qasımoğlu</item>
         <item>Əlixan Musayev</item>
-        <item>Ağabala Mehdiyev - Dürdanə Cəfərli</item>
+        <item>Ağabala Mehdiyev\nDürdanə Cəfərli</item>
         <item>Ali Bulaç-1</item>
         <item>Ali Bulaç-2</item>
         <item>Ali Fikri Yavuz</item>
@@ -45,13 +45,14 @@
         <item>Süleyman Ateş</item>
         <item>Tefhim-ul Kuran</item>
         <item>Adem Uğur</item>
+        <item>Edip Yüksel</item>
     </string-array>
 
     <string-array name="table_names">
         <item>arabic</item>
         <item>ziya</item>
         <item>yasar_nuri_ozturk</item>
-        <item>edip_yuksel</item>
+        <item>neriman</item>
         <item>elixan_musayev</item>
         <item>durdane</item>
         <item>ali_bulac_1</item>
@@ -76,7 +77,129 @@
         <item>suleyman_ates</item>
         <item>tefhim_ul_kuran</item>
         <item>adem_ugur</item>
+        <item>edip_yuksel</item>
     </string-array>
 
+
+    <string-array name="links">
+        <item>001.el-Fatihe.mp3</item>
+        <item>002.el-Beqere.mp3</item>
+        <item>003.Ali-Imran.mp3</item>
+        <item>004.en-Nisa.mp3</item>
+        <item>005.el-Maide.mp3</item>
+        <item>006.el-Enam.mp3</item>
+        <item>007.el-Eraf.mp3</item>
+        <item>008.el-Enfal.mp3</item>
+        <item>009.et-Tovbe.mp3</item>
+        <item>010.Yunus.mp3</item>
+        <item>011.Hud.mp3</item>
+        <item>012.Yusuf.mp3</item>
+        <item>013.er-Rad.mp3</item>
+        <item>014.Ibrahim.mp3</item>
+        <item>015.el-Hicr.mp3</item>
+        <item>016.en-Nehl.mp3</item>
+        <item>017.el-Isra.mp3</item>
+        <item>018.el-Kehf.mp3</item>
+        <item>019.Meryem.mp3</item>
+        <item>020.Ta-Ha.mp3</item>
+        <item>021.el-Enbiya.mp3</item>
+        <item>022.el-Hecc.mp3</item>
+        <item>023.el-Muminun.mp3</item>
+        <item>024.en-Nur.mp3</item>
+        <item>025.el-Furqan.mp3</item>
+        <item>026.esh-Shuara.mp3</item>
+        <item>027.en-Neml.mp3</item>
+        <item>028.el-Qasas.mp3</item>
+        <item>029.el-Enkabut.mp3</item>
+        <item>030.er-Rum.mp3</item>
+        <item>031.Logman.mp3</item>
+        <item>032.es-Secde.mp3</item>
+        <item>033.el-Ehzab.mp3</item>
+        <item>034.Saba.mp3</item>
+        <item>035.Fatir.mp3</item>
+        <item>036.Ya_Sin.mp3</item>
+        <item>037.es-Saffat.mp3</item>
+        <item>038.Sad.mp3</item>
+        <item>039.ez-Zumar.mp3</item>
+        <item>040.Gafir.mp3</item>
+        <item>041.Fussilat.mp3</item>
+        <item>042.esh-Shura.mp3</item>
+        <item>043.ez-Zuxruf.mp3</item>
+        <item>044.ed-Duxan.mp3</item>
+        <item>045.el-Casiye.mp3</item>
+        <item>046.el-Ehqaf.mp3</item>
+        <item>047.Muhammed.mp3</item>
+        <item>048.el-Feth.mp3</item>
+        <item>049.el-Hucurat.mp3</item>
+        <item>050.Qaf.mp3</item>
+        <item>051.ez-Zariyat.mp3</item>
+        <item>052.et-Tur.mp3</item>
+        <item>053.en-Necm.mp3</item>
+        <item>054.el-Qamar.mp3</item>
+        <item>055.er-Rahman.mp3</item>
+        <item>056.el-Vaqie.mp3</item>
+        <item>057.el-Hedid.mp3</item>
+        <item>058.el-Mucadile.mp3</item>
+        <item>059.el-Heshr.mp3</item>
+        <item>060.el-Mumtahene.mp3</item>
+        <item>061.es-Saff.mp3</item>
+        <item>062.el-Cumua.mp3</item>
+        <item>063.el-Munafiqun.mp3</item>
+        <item>064.et-Tagabun.mp3</item>
+        <item>065.et-Talaq.mp3</item>
+        <item>066.et-Tehrim.mp3</item>
+        <item>067.el-Mulk.mp3</item>
+        <item>068.el-Qalem.mp3</item>
+        <item>069.el-Haqqa.mp3</item>
+        <item>070.el-Mearic.mp3</item>
+        <item>071.Nuh.mp3</item>
+        <item>072.el-Cinn.mp3</item>
+        <item>073.el-Muzzemmil.mp3</item>
+        <item>074.el-Muddessir.mp3</item>
+        <item>075.el-Qiyame.mp3</item>
+        <item>076.el-Insan.mp3</item>
+        <item>077.el-Mursalat.mp3</item>
+        <item>078.en-Nebe.mp3</item>
+        <item>079.en-Naziat.mp3</item>
+        <item>080.Ebese.mp3</item>
+        <item>081.et-Tekvir.mp3</item>
+        <item>082.el-Infitar.mp3</item>
+        <item>083.el-Mutaffifin.mp3</item>
+        <item>084.el-Inshiqaq.mp3</item>
+        <item>085.el-Buruc.mp3</item>
+        <item>086.et-Tariq.mp3</item>
+        <item>087.el-Ala.mp3</item>
+        <item>088.el-Gashiya.mp3</item>
+        <item>089.el-Fecr.mp3</item>
+        <item>090.el-Beled.mp3</item>
+        <item>091.esh-Shems.mp3</item>
+        <item>092.el-Leyl.mp3</item>
+        <item>093.ed-Duha.mp3</item>
+        <item>094.esh-Sherh.mp3</item>
+        <item>095.et-Tin.mp3</item>
+        <item>096.el-Alaq.mp3</item>
+        <item>097.el-Qedr.mp3</item>
+        <item>098.el-Beyyine.mp3</item>
+        <item>099.ez-Zelzele.mp3</item>
+        <item>100.el-Adiyat.mp3</item>
+        <item>101.el-Qarie.mp3</item>
+        <item>102.et-Tekasur.mp3</item>
+        <item>103.el-Asr.mp3</item>
+        <item>104.el-Humeze.mp3</item>
+        <item>105.el-Fil.mp3</item>
+        <item>106.Qureysh.mp3</item>
+        <item>107.el-Maun.mp3</item>
+        <item>108.el-Kovser.mp3</item>
+        <item>109.el-Kafirun.mp3</item>
+        <item>110.en-Nesr.mp3</item>
+        <item>111.el-Mesed.mp3</item>
+        <item>112.el-Ixlas.mp3</item>
+        <item>113.el-Feleq.mp3</item>
+        <item>114.en-Nas.mp3</item>
+
+    </string-array>
+
+
+    <string name="testsong_20_sec">https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3<sharing></sharing></string>
 
 </resources>

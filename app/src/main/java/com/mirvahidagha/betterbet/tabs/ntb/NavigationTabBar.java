@@ -38,10 +38,12 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.ViewCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
+
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -801,7 +803,7 @@ public class NavigationTabBar extends View implements ViewPager.OnPageChangeList
     public void setBehaviorEnabled(final boolean enabled) {
         mBehaviorEnabled = enabled;
 
-        if (getParent() != null  && getParent() instanceof CoordinatorLayout) {
+        if (getParent() != null && getParent() instanceof CoordinatorLayout) {
             final ViewGroup.LayoutParams params = getLayoutParams();
             if (mBehavior == null) mBehavior = new NavigationTabBarBehavior(enabled);
             else mBehavior.setBehaviorTranslationEnabled(enabled);
@@ -1185,7 +1187,7 @@ public class NavigationTabBar extends View implements ViewPager.OnPageChangeList
 
                 // Set offset to titles
                 leftTitleOffset = leftOffset + (float) model.mIcon.getWidth() * 0.5F;
-                topTitleOffset = topOffset +  (model.mIcon.getHeight() + iconMarginTitleHeight) * 0.5f;
+                topTitleOffset = topOffset + (model.mIcon.getHeight() + iconMarginTitleHeight) * 0.5f;
             }
 
             matrixCenterX = leftOffset + (float) model.mIcon.getWidth() * 0.5F;
@@ -1647,7 +1649,6 @@ public class NavigationTabBar extends View implements ViewPager.OnPageChangeList
             }
         };
     }
-
 
 
     @Override

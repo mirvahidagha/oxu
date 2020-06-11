@@ -9,7 +9,10 @@ package com.mirvahidagha.betterbet.Fastscroll.viewprovider;
  */
 public interface ViewBehavior {
     void onHandleGrabbed();
+
     void onHandleReleased();
+
     void onScrollStarted();
+
     void onScrollFinished();
 }

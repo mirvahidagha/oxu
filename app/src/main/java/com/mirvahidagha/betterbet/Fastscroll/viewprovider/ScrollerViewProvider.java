@@ -20,11 +20,11 @@ public abstract class ScrollerViewProvider {
     private ViewBehavior handleBehavior;
     private ViewBehavior bubbleBehavior;
 
-    public void setFastScroller(FastScroller scroller){
+    public void setFastScroller(FastScroller scroller) {
         this.scroller = scroller;
     }
 
-    protected Context getContext(){
+    protected Context getContext() {
         return scroller.getContext();
     }
 
@@ -46,6 +46,7 @@ public abstract class ScrollerViewProvider {
 
     /**
      * Bubble view has to provide a {@link TextView} that will show the index title.
+     *
      * @return A {@link TextView} that will hold the index title.
      */
     public abstract TextView provideBubbleTextView();
@@ -53,6 +54,7 @@ public abstract class ScrollerViewProvider {
     /**
      * To offset the position of the bubble relative to the handle. E.g. in {@link DefaultScrollerViewProvider}
      * the sharp corner of the bubble is aligned with the center of the handle.
+     *
      * @return the position of the bubble in relation to the handle (according to the orientation).
      */
     public abstract int getBubbleOffset();
@@ -63,34 +65,34 @@ public abstract class ScrollerViewProvider {
     @Nullable
     protected abstract ViewBehavior provideBubbleBehavior();
 
-    protected ViewBehavior getHandleBehavior(){
-        if(handleBehavior==null) handleBehavior = provideHandleBehavior();
+    protected ViewBehavior getHandleBehavior() {
+        if (handleBehavior == null) handleBehavior = provideHandleBehavior();
         return handleBehavior;
     }
 
-    protected ViewBehavior getBubbleBehavior(){
-        if(bubbleBehavior==null) bubbleBehavior = provideBubbleBehavior();
+    protected ViewBehavior getBubbleBehavior() {
+        if (bubbleBehavior == null) bubbleBehavior = provideBubbleBehavior();
         return bubbleBehavior;
     }
 
-    public void onHandleGrabbed(){
-        if(getHandleBehavior()!=null) getHandleBehavior().onHandleGrabbed();
-        if(getBubbleBehavior()!=null) getBubbleBehavior().onHandleGrabbed();
+    public void onHandleGrabbed() {
+        if (getHandleBehavior() != null) getHandleBehavior().onHandleGrabbed();
+        if (getBubbleBehavior() != null) getBubbleBehavior().onHandleGrabbed();
     }
 
-    public void onHandleReleased(){
-        if(getHandleBehavior()!=null) getHandleBehavior().onHandleReleased();
-        if(getBubbleBehavior()!=null) getBubbleBehavior().onHandleReleased();
+    public void onHandleReleased() {
+        if (getHandleBehavior() != null) getHandleBehavior().onHandleReleased();
+        if (getBubbleBehavior() != null) getBubbleBehavior().onHandleReleased();
     }
 
-    public void onScrollStarted(){
-        if(getHandleBehavior()!=null) getHandleBehavior().onScrollStarted();
-        if(getBubbleBehavior()!=null) getBubbleBehavior().onScrollStarted();
+    public void onScrollStarted() {
+        if (getHandleBehavior() != null) getHandleBehavior().onScrollStarted();
+        if (getBubbleBehavior() != null) getBubbleBehavior().onScrollStarted();
     }
 
-    public void onScrollFinished(){
-        if(getHandleBehavior()!=null) getHandleBehavior().onScrollFinished();
-        if(getBubbleBehavior()!=null) getBubbleBehavior().onScrollFinished();
+    public void onScrollFinished() {
+        if (getHandleBehavior() != null) getHandleBehavior().onScrollFinished();
+        if (getBubbleBehavior() != null) getBubbleBehavior().onScrollFinished();
     }
 
 }

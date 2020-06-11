@@ -3,13 +3,17 @@ package com.mirvahidagha.betterbet.tabs.behavior;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.os.Build;
+
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
 import androidx.core.view.ViewCompat;
 import androidx.core.view.ViewPropertyAnimatorCompat;
 import androidx.core.view.ViewPropertyAnimatorUpdateListener;
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;

@@ -5,6 +5,7 @@ import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -17,11 +18,10 @@ import com.google.android.material.appbar.AppBarLayout;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.fragment.app.Fragment;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
@@ -31,16 +31,16 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.mirvahidagha.betterbet.Entities.Surah;
 import com.mirvahidagha.betterbet.Others.FragmentAdapter;
+import com.mirvahidagha.betterbet.Others.Just;
 import com.mirvahidagha.betterbet.Others.MyData;
+import com.mirvahidagha.betterbet.Others.TabFragment;
 import com.mirvahidagha.betterbet.R;
 import com.mirvahidagha.betterbet.ViewModels.SurahViewModel;
 import com.mirvahidagha.betterbet.fragments.AyahsFragment;
@@ -59,21 +59,24 @@ import java.util.Objects;
 
 public class Main extends AppCompatActivity {
 
+    SearchView searchView;
+    String[] tags = {"subjects", "search", "sura", "star", "listen"};
     String[] tabNames, colors, translations, tableNames;
     private Menu menu;
     ViewPager viewPager;
-    Typeface bold, regular, light;
+    public static Typeface bold, regular, light;
     CoordinatorLayout coordinatorLayout;
     int currentPosition = 2;
     TextView title;
-    Toolbar toolbar;
+    public Toolbar toolbar;
     NavigationTabBar navigation;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     boolean[] checkedItems;
-    final ArrayList<Fragment> fragments = new ArrayList<>();
+    final ArrayList<TabFragment> fragments = new ArrayList<>();
     FragmentAdapter adapter;
     FragmentManager fm;
+    MenuItem menuItem;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -101,7 +104,7 @@ public class Main extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         title = toolbar.findViewById(R.id.appname);
         title.setTypeface(bold);
-        toolbar.inflateMenu(R.menu.menu_search);
+        //   toolbar.inflateMenu(R.menu.menu_search);
         toolbar.setBackgroundColor(Color.parseColor(colors[2]));
         title.setText(tabNames[2]);
         setSupportActionBar(toolbar);
@@ -126,7 +129,6 @@ public class Main extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         adapter.setFragments(fragments);
         viewPager.setOffscreenPageLimit(5);
-
 
         final NavigationTabBar navigationTabBar = findViewById(R.id.ntb_horizontal);
         navigation = navigationTabBar;
@@ -195,19 +197,26 @@ public class Main extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onPageSelected(final int position) {
+                EventBus.getDefault().post(new Just());
                 title.setVisibility(View.VISIBLE);
+                searchView.setQuery("", false);
+                searchView.clearFocus();
+                searchView.setIconified(true);
                 title.setText(tabNames[position]);
                 changeBackground(position);
 
                 if (position != 2) navigationTabBar.show();
-
-
-                AppBarLayout appbar = findViewById(R.id.appbar);
+                if (position == 4) {
+                    navigationTabBar.setBehaviorEnabled(false);
+                } else {
+                    navigationTabBar.setBehaviorEnabled(true);
+                }
 
             }
 
             @Override
             public void onPageScrollStateChanged(final int state) {
+
 
             }
         });
@@ -227,7 +236,6 @@ public class Main extends AppCompatActivity {
             }
         }, 500);
 
-
     }
 
     @Override
@@ -235,7 +243,6 @@ public class Main extends AppCompatActivity {
         this.menu = menu;
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
-
     }
 
     @Override
@@ -248,6 +255,9 @@ public class Main extends AppCompatActivity {
                 chooseMain();
                 break;
             case R.id.about:
+                Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -312,9 +322,44 @@ public class Main extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+
+        menuItem = menu.findItem(R.id.menu_action_search);
+
+        searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                TabFragment tabFragment = (TabFragment) fm.findFragmentByTag(tags[currentPosition]);
+                assert tabFragment != null;
+                tabFragment.search(newText);
+                return false;
+            }
+        });
+
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                title.setVisibility(View.GONE);
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                title.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
         return super.onPrepareOptionsMenu(menu);
 
     }
+
 
     void changeBackground(int position) {
 
@@ -375,12 +420,12 @@ public class Main extends AppCompatActivity {
         title.setText(tabNames[currentPosition]);
     }
 
-    @Subscribe
-    public void customEventReceived(Boolean searchPressed) {
-        if (searchPressed)
-            title.setVisibility(View.GONE);
-        else title.setVisibility(View.VISIBLE);
-    }
+//    @Subscribe
+//    public void customEventReceived(Boolean searchPressed) {
+//        if (searchPressed)
+//            title.setVisibility(View.GONE);
+//        else title.setVisibility(View.VISIBLE);
+//    }
 
     @Subscribe
     public void customEventReceived(Integer event) {
@@ -399,14 +444,14 @@ public class Main extends AppCompatActivity {
         if (fragment == null) {
             fragment = (new AyahsFragment());
         }
-        adapter.updateFragment("ayah", fragment.getInstance(data.getSurahId(), data.getScrollPosition()));
-        fragment.update();
+        adapter.updateFragment("ayah", fragment.getInstance(data.getSurahId(), data.getScrollPosition(), data.getTranstalion()));
+        fragment.update(data.getTranstalion());
     }
 
     @Override
     public void onBackPressed() {
 
-        adapter.updateFragment("sura", fm.findFragmentByTag("sura"));
+        adapter.updateFragment("sura", (TabFragment) fm.findFragmentByTag("sura"));
 
     }
 

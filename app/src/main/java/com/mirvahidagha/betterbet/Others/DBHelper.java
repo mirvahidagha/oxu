@@ -24,15 +24,15 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, dbName, factory, version);
         this.context = context;
         this.dbName = dbName;
-        dbFile= new File(DB_PATH + dbName);
+        dbFile = new File(DB_PATH + dbName);
     }
 
     @Override
     public synchronized SQLiteDatabase getWritableDatabase() {
 
-        if(!dbFile.exists()){
+        if (!dbFile.exists()) {
             SQLiteDatabase db = super.getWritableDatabase();
-           // copyDataBase(db.getPath());
+            // copyDataBase(db.getPath());
             DBHelper.copyDatabase(context, dbName);
         }
         return super.getWritableDatabase();
@@ -40,19 +40,21 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public synchronized SQLiteDatabase getReadableDatabase() {
-        if(!dbFile.exists()){
+        if (!dbFile.exists()) {
             SQLiteDatabase db = super.getReadableDatabase();
-          //  copyDataBase(db.getPath());
+            //  copyDataBase(db.getPath());
             DBHelper.copyDatabase(context, dbName);
         }
         return super.getReadableDatabase();
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {}
+    public void onCreate(SQLiteDatabase db) {
+    }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    }
 
     public static void copyDatabase(final Context ctx, String dbName) {
         if (ctx != null) {

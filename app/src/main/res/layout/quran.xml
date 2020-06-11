@@ -16,7 +16,7 @@
         android:paddingBottom="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/item_list" />
+        tools:listitem="@layout/item_surah" />
 
 
 

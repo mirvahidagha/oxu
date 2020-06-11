@@ -45,7 +45,6 @@ public class BetterDialog extends SweetAlertDialog {
 
     @Override
     public SweetAlertDialog setCustomView(View view) {
-
         RecyclerAyah recycler = view.findViewById(R.id.recycler_dialog);
         RecycleAdapter adapter = new RecycleAdapter(surah.getCount());
         recycler.setHasFixedSize(true);
@@ -58,6 +57,7 @@ public class BetterDialog extends SweetAlertDialog {
     public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder> {
 
         int count;
+
         RecycleAdapter(int count) {
             this.count = count;
         }

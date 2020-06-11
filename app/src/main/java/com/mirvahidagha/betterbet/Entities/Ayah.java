@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "ziya")
 
-public class Ayah implements Comparable<Ayah>{
+public class Ayah implements Comparable<Ayah> {
     public Integer getSuraID() {
         return suraID;
     }
@@ -39,7 +39,7 @@ public class Ayah implements Comparable<Ayah>{
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(int id)    {
         this.id = id;
     }
 
@@ -76,6 +76,6 @@ public class Ayah implements Comparable<Ayah>{
 
     @Override
     public int compareTo(Ayah o) {
-        return this.getTableId()-o.getTableId();
+        return this.getTableId() - o.getTableId();
     }
 }

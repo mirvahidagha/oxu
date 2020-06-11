@@ -5,12 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:id="@+id/ayah_number"
-    style="@style/Widget.MaterialComponents.Button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="4dp"
     android:padding="4dp"
     android:text="19"
+    app:elevation="5dp"
+    android:theme="@style/FormButton"
     android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
     android:textSize="18sp"
     app:cornerRadius="8dp">

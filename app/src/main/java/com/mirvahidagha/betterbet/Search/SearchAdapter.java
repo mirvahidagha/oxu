@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mirvahidagha.betterbet.Activities.Main;
 import com.mirvahidagha.betterbet.Entities.Ayah;
 import com.mirvahidagha.betterbet.Others.MyData;
 import com.mirvahidagha.betterbet.R;
@@ -65,9 +66,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ResultsVie
         animation.setInterpolator(new AccelerateInterpolator());
 
         resultsViewHolder.card.setAnimation(animation);
+        resultsViewHolder.tv_title.setTypeface(Main.bold);
         resultsViewHolder.tv_title.setText(mDataFiltered.get(position).getTitle() +
                 " - " + mDataFiltered.get(position).getAyah().getVerseID());
 
+        resultsViewHolder.tv_content.setTypeface(Main.light);
         resultsViewHolder.tv_content.setText(mDataFiltered.get(position).getAyah().getAyahText());
 
         resultsViewHolder.card.setOnClickListener(v -> {
@@ -81,7 +84,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ResultsVie
         return mDataFiltered.size();
     }
 
-     private CharSequence highlight(String search, String originalText) {
+    private CharSequence highlight(String search, String originalText) {
         if (search != null && !search.equalsIgnoreCase("")) {
 
             int start = originalText.indexOf(search);
@@ -116,7 +119,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ResultsVie
             protected FilterResults performFiltering(CharSequence constraint) {
                 String Key = constraint.toString();
                 if (Key.isEmpty()) {
-                  //  mDataFiltered = new ArrayList<>();
+                    //  mDataFiltered = new ArrayList<>();
                     mDataFiltered = mData;
                 } else {
                     List<NewsItem> lstFiltered = new ArrayList<>();
