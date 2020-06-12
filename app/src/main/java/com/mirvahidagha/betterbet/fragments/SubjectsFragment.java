@@ -28,11 +28,8 @@ import static com.mirvahidagha.betterbet.sample.GenreDataFactory.makeGenres;
 public class SubjectsFragment extends TabFragment {
 
     FastScroller fastScroller;
-  //  SearchView searchView;
     public GenreAdapter adapter;
     SubjectViewModel viewModel;
-    List<SubjectWithIndexes> list;
-   // MenuItem menuItem;
     public SubjectsFragment() {
         // Required empty public constructor
     }
@@ -79,7 +76,7 @@ public class SubjectsFragment extends TabFragment {
         viewModel.getSubjects().observe(getViewLifecycleOwner(), new Observer<List<SubjectWithIndexes>>() {
             @Override
             public void onChanged(List<SubjectWithIndexes> subjectWithIndexes) {
-                adapter = new GenreAdapter(makeGenres(subjectWithIndexes));
+                adapter = new GenreAdapter(makeGenres(subjectWithIndexes), subjectWithIndexes);
                 recyclerView.setLayoutManager(grid);
                 recyclerView.setAdapter(adapter);
 
@@ -94,7 +91,8 @@ public class SubjectsFragment extends TabFragment {
 
     @Override
     public void search(String text) {
-        Toast.makeText(getActivity(), "subjects "+ text, Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(getActivity(), "subjects "+ text, Toast.LENGTH_SHORT).show();
+        adapter.getFilter().filter(text);
     }
 
 }

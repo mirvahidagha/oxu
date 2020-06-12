@@ -144,39 +144,6 @@ public class SearchFragment extends TabFragment {
         inflater = getActivity().getMenuInflater();
         inflater.inflate(R.menu.menu_search, menu);
     }
-//
-//    @Override
-//    public void onPrepareOptionsMenu(@NonNull Menu menu) {
-//        super.onPrepareOptionsMenu(menu);
-//
-//            menuItem = menu.findItem(R.id.menu_action_search);
-//            searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-//
-//            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//                @Override
-//                public boolean onQueryTextSubmit(String query) {
-//
-//                    return false;
-//                }
-//
-//                @Override
-//                public boolean onQueryTextChange(String newText) {
-//
-//                    adapter.getFilter().filter(newText);
-//
-//                    return false;
-//                }
-//            });
-//
-//            searchView.setOnSearchClickListener(v -> EventBus.getDefault().post(true));
-//
-//            searchView.setOnCloseListener(() -> {
-//                EventBus.getDefault().post(false);
-//                return false;
-//            });
-//
-//    }
-
 
 
     @Override

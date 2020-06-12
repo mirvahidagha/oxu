@@ -162,7 +162,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio%203.6RC1/plugins/android/lib/android.jar!/images/material_design_icons/av/ic_sort_by_alpha_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio%204%20canary%208/plugins/android/lib/android.jar!/images/material/icons/materialiconsoutlined/cancel/outline_cancel_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -172,8 +172,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="quran_order" />
+                            <entry key="outputName" value="ic_cancel" />
                             <entry key="sourceFile" value="C:\Users\mirva\OneDrive\Desktop\icons8_Quran_1.svg" />
                           </map>
                         </option>
