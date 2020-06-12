@@ -2,26 +2,17 @@ package com.mirvahidagha.betterbet.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
-import androidx.core.view.MenuItemCompat;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.mirvahidagha.betterbet.Activities.Main;
 import com.mirvahidagha.betterbet.Entities.SubjectWithIndexes;
 import com.mirvahidagha.betterbet.Fastscroll.FastScroller;
 import com.mirvahidagha.betterbet.Others.TabFragment;
@@ -29,8 +20,6 @@ import com.mirvahidagha.betterbet.R;
 import com.mirvahidagha.betterbet.ViewModels.SubjectViewModel;
 import com.mirvahidagha.betterbet.expandable.models.ExpandableListPosition;
 import com.mirvahidagha.betterbet.sample.expand.GenreAdapter;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -93,7 +82,6 @@ public class SubjectsFragment extends TabFragment {
                 adapter = new GenreAdapter(makeGenres(subjectWithIndexes));
                 recyclerView.setLayoutManager(grid);
                 recyclerView.setAdapter(adapter);
-
 
             }
         });
