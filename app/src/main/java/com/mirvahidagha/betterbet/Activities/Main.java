@@ -21,6 +21,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
@@ -36,9 +37,8 @@ import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.mirvahidagha.betterbet.Entities.Surah;
 import com.mirvahidagha.betterbet.Others.FragmentAdapter;
 import com.mirvahidagha.betterbet.Others.Just;
@@ -58,6 +58,7 @@ import com.mirvahidagha.betterbet.tabs.ntb.NavigationTabBar;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -114,6 +115,18 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         toolbar = findViewById(R.id.toolbar);
         main = new int[]{pref.getInt("main", 0)};
         AppCompatSpinner spinner = toolbar.findViewById(R.id.spinner);
+
+
+        try {
+            Field popup = AppCompatSpinner.class.getDeclaredField("mPopup");
+            popup.setAccessible(true);
+            android.widget.ListPopupWindow popupWindow = (android.widget.ListPopupWindow) popup.get(spinner);
+            popupWindow.setHeight(300);
+        }
+        catch (NoClassDefFoundError | ClassCastException | NoSuchFieldException | IllegalAccessException e) {
+            // silently fail...
+        }
+
 
         spinnerAdapter = new ToolbarSpinnerAdapterer(getApplicationContext(), translations, main[0]);
 
@@ -188,9 +201,9 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.ic_star),
+                        ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_star),
                         Color.parseColor(colors[3]))
-                        .selectedIcon(getResources().getDrawable(R.drawable.ic_star_2))
+                        .selectedIcon( ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_star_2))
                         .title(tabNames[3])
                         .badgeTitle("0")
                         .build()
@@ -484,7 +497,6 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, translations[position], Toast.LENGTH_SHORT).show();
         //  main[0]=position;
         editor.putInt("main", position);
         editor.apply();

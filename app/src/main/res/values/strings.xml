@@ -18,22 +18,18 @@
 
     <string-array name="translations">
         <item>Ərəbcə (Orijinal)</item>
-        <item>Ziya Bünyadov\nVasim Məmmədəliyev</item>
-        <item>Yaşar Nuri Öztürk</item>
         <item>Nəriman Qasımoğlu</item>
-        <item>Əlixan Musayev</item>
+        <item>Ziya Bünyadov\nVasim Məmmədəliyev</item>
         <item>Ağabala Mehdiyev\nDürdanə Cəfərli</item>
-        <item>Ali Bulaç-1</item>
-        <item>Ali Bulaç-2</item>
-        <item>Ali Fikri Yavuz</item>
-        <item>Bekir Sadak</item>
-        <item>Celal Yıldırım</item>
+        <item>Əlixan Musayev</item>
+        <item>Yaşar Nuri Öztürk</item>
+        <item>Ali Bulaç</item>
+        <item>Edip Yüksel</item>
+        <item>Süleyman Ateş</item>
+        <item>Tefhim-ul Kuran</item>
         <item>Diyanet işleri</item>
-        <item>Diyanet vakfı</item>
         <item>Abdulbaki Gölpınarlı</item>
         <item>Elmalılı Hamdi Yazır</item>
-        <item>Elmalılı Hamdi Yazır-1</item>
-        <item>Elmalılı Hamdi Yazır-2</item>
         <item>Fizilal-il Kuran</item>
         <item>Gültekin Onan</item>
         <item>Hasan Basri Çantay</item>
@@ -42,30 +38,25 @@
         <item>Ömer Nasuhi Bilmen</item>
         <item>Şaban Piriş</item>
         <item>Suat Yıldırım</item>
-        <item>Süleyman Ateş</item>
-        <item>Tefhim-ul Kuran</item>
-        <item>Adem Uğur</item>
-        <item>Edip Yüksel</item>
+
+
+
     </string-array>
 
     <string-array name="table_names">
         <item>arabic</item>
-        <item>ziya</item>
-        <item>yasar_nuri_ozturk</item>
         <item>neriman</item>
-        <item>elixan_musayev</item>
+        <item>ziya</item>
         <item>durdane</item>
-        <item>ali_bulac_1</item>
-        <item>ali_bulac_2</item>
-        <item>ali_fikri_yavuz</item>
-        <item>bekir_sadak</item>
-        <item>celal_yildirim</item>
+        <item>elixan_musayev</item>
+        <item>yasar_nuri_ozturk</item>
+        <item>ali_bulac</item>
+        <item>edip_yuksel</item>
+        <item>suleyman_ates</item>
+        <item>tefhim_ul_kuran</item>
         <item>diyanet_isleri</item>
-        <item>diyanet_vakfi</item>
         <item>abdulbaki</item>
         <item>elmalili_hamdi_yazir</item>
-        <item>elmalili_hamdi_yazir_sade_1</item>
-        <item>elmalili_hamdi_yazir_sade_2</item>
         <item>fizilal_il_kuran</item>
         <item>gultekin_onan</item>
         <item>hasan_basri_cantay</item>
@@ -74,10 +65,10 @@
         <item>omer_nasuhi_bilmen</item>
         <item>saban_piris</item>
         <item>suat_yildirim</item>
-        <item>suleyman_ates</item>
-        <item>tefhim_ul_kuran</item>
-        <item>adem_ugur</item>
-        <item>edip_yuksel</item>
+
+
+
+
     </string-array>
 
 
@@ -198,8 +189,4 @@
         <item>114.en-Nas.mp3</item>
 
     </string-array>
-
-
-    <string name="testsong_20_sec">https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3<sharing></sharing></string>
-
 </resources>

@@ -3,10 +3,12 @@ package com.mirvahidagha.betterbet.Others;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -31,7 +33,7 @@ public class ToolbarSpinnerAdapterer extends BaseAdapter {
     public ToolbarSpinnerAdapterer(Context applicationContext, String[] translations, int selected) {
         this.context = applicationContext;
         this.translations = translations;
-        this.selected=selected;
+        this.selected = selected;
         inflter = (LayoutInflater.from(applicationContext));
     }
 
@@ -54,21 +56,30 @@ public class ToolbarSpinnerAdapterer extends BaseAdapter {
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
 
 
-       View v = super.getDropDownView(position, null, parent);
+        View v = super.getDropDownView(position, null, parent);
         if (position == selected)
-
             v.setBackgroundColor(context.getResources().getColor(R.color.qirmizi));
 
         else v.setBackgroundColor(context.getResources().getColor(R.color.goy));
+
+        TextView spinnerTextView = v.findViewById(R.id.spinner_textview);
+
+        spinnerTextView.setLayoutParams(new LinearLayout.LayoutParams(600, -2));
+
+        spinnerTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+        spinnerTextView.setPadding(48, 12, 8, 12);
+
+        spinnerTextView.setMaxLines(2);
         return v;
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflter.inflate(R.layout.custom_spinner_items, null);
-        TextView names = (TextView) view.findViewById(R.id.textView);
+        TextView names = (TextView) view.findViewById(R.id.spinner_textview);
         names.setText(translations[i]);
-        names.setTypeface(Main.light);
+        names.setTypeface(Main.bold);
         return view;
     }
 }
