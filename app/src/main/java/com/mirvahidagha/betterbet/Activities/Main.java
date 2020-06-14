@@ -18,6 +18,7 @@ import com.google.android.material.appbar.AppBarLayout;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.MenuItemCompat;
@@ -33,6 +34,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +44,7 @@ import com.mirvahidagha.betterbet.Others.FragmentAdapter;
 import com.mirvahidagha.betterbet.Others.Just;
 import com.mirvahidagha.betterbet.Others.MyData;
 import com.mirvahidagha.betterbet.Others.TabFragment;
+import com.mirvahidagha.betterbet.Others.ToolbarSpinnerAdapterer;
 import com.mirvahidagha.betterbet.R;
 import com.mirvahidagha.betterbet.ViewModels.SurahViewModel;
 import com.mirvahidagha.betterbet.fragments.AyahsFragment;
@@ -55,10 +59,13 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Main extends AppCompatActivity {
 
+public class Main extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    List<String> list;
     SearchView searchView;
     String[] tags = {"subjects", "search", "sura", "star", "listen"};
     String[] tabNames, colors, translations, tableNames;
@@ -77,6 +84,9 @@ public class Main extends AppCompatActivity {
     FragmentAdapter adapter;
     FragmentManager fm;
     MenuItem menuItem;
+    LinearLayout appNameContainer;
+    int[] main;
+    ToolbarSpinnerAdapterer spinnerAdapter;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -102,7 +112,18 @@ public class Main extends AppCompatActivity {
         light = Typeface.createFromAsset(getAssets(), "light.ttf");
         tabNames = getResources().getStringArray(R.array.tab_names);
         toolbar = findViewById(R.id.toolbar);
+        main = new int[]{pref.getInt("main", 0)};
+        AppCompatSpinner spinner = toolbar.findViewById(R.id.spinner);
+
+        spinnerAdapter = new ToolbarSpinnerAdapterer(getApplicationContext(), translations, main[0]);
+
+        spinner.setAdapter(spinnerAdapter);
+        spinner.setOnItemSelectedListener(this);
+
+
+        spinner.setSelection(main[0]);
         title = toolbar.findViewById(R.id.appname);
+        appNameContainer= toolbar.findViewById(R.id.appname_container);
         title.setTypeface(bold);
         //   toolbar.inflateMenu(R.menu.menu_search);
         toolbar.setBackgroundColor(Color.parseColor(colors[2]));
@@ -198,7 +219,7 @@ public class Main extends AppCompatActivity {
             @Override
             public void onPageSelected(final int position) {
                 EventBus.getDefault().post(new Just());
-                title.setVisibility(View.VISIBLE);
+                appNameContainer.setVisibility(View.VISIBLE);
                 searchView.setQuery("", false);
                 searchView.clearFocus();
                 searchView.setIconified(true);
@@ -345,13 +366,13 @@ public class Main extends AppCompatActivity {
         searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                title.setVisibility(View.GONE);
+                appNameContainer.setVisibility(View.GONE);
             }
         });
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                title.setVisibility(View.VISIBLE);
+                appNameContainer.setVisibility(View.VISIBLE);
                 return false;
             }
         });
@@ -420,12 +441,6 @@ public class Main extends AppCompatActivity {
         title.setText(tabNames[currentPosition]);
     }
 
-//    @Subscribe
-//    public void customEventReceived(Boolean searchPressed) {
-//        if (searchPressed)
-//            title.setVisibility(View.GONE);
-//        else title.setVisibility(View.VISIBLE);
-//    }
 
     @Subscribe
     public void customEventReceived(Integer event) {
@@ -467,4 +482,19 @@ public class Main extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(this, translations[position], Toast.LENGTH_SHORT).show();
+        //  main[0]=position;
+        editor.putInt("main", position);
+        editor.apply();
+
+        spinnerAdapter.setSelected(position);
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
